@@ -4,7 +4,7 @@ from users.managers import CustomUserManager
 
 class User(AbstractUser):
     ROLE_CHOICES = (
-        ('subscriber', 'Subscriber/Viewer'),
+        ('subscriber', 'Subscriber'),
         ('editor', 'Editor'),
     )
     username = None

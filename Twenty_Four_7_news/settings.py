@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     'djoser',
     'users',
     'api',
+    'news_app',
     "debug_toolbar",
-    
 ]
 
 MIDDLEWARE = [

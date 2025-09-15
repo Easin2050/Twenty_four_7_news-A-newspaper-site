@@ -2,7 +2,6 @@ from djoser.serializers import UserCreateSerializer as BaseUserCreateSerializer,
 from rest_framework import serializers
 from .models import User,UserProfile
 from django.contrib.auth import get_user_model
-from rest_framework.permissions import BasePermission, IsAuthenticated, SAFE_METHODS
 
 class UserCreateSerializer(BaseUserCreateSerializer):
     class Meta(BaseUserCreateSerializer.Meta):
@@ -16,10 +15,6 @@ class UserSerializer(BaseUserSerializer):
         fields = ['id', 'email', 'first_name',
                   'last_name','role']
         
-    def get_permissions(self):
-        if self.request.method in SAFE_METHODS:
-            return [IsAuthenticated()]
-        return [IsAuthenticated()]
 
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
