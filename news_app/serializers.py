@@ -6,6 +6,15 @@ class CategorySerializer(serializers.ModelSerializer):
         model=Category
         fields=['id','name','description']
 
+class CategoryArticleSerializer(serializers.ModelSerializer):
+    short_body = serializers.SerializerMethodField(method_name='short_body_method')
+
+    class Meta:
+        model = NewsArticle
+        fields = ['id', 'title', 'short_body']
+
+    def short_body_method(self, obj):
+        return obj.body[:50] 
 
 class NewsArticleSerializer(serializers.ModelSerializer):
     class Meta:
