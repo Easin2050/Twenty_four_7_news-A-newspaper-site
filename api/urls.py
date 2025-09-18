@@ -1,31 +1,26 @@
 from django.urls import path, include
 from rest_framework_nested import routers
-from users.views import UserprofileViewSet
+from users.views import UserProfileViewSet
 from users.views import UserViewSet
-from news_app.views import NewsArticleViewSet,CategoryArticlesViewSet
+from news_app.views import NewsArticleViewSet,CategoryViewSet
 
 router = routers.DefaultRouter()
 
 router.register('users', UserViewSet, basename='users')
-router.register('categories',CategoryArticlesViewSet, basename='categories')
+router.register('categories',CategoryViewSet, basename='categories')
 router.register('articles',NewsArticleViewSet, basename='articles')
+router.register('profiles',UserProfileViewSet,basename='profiles')
 
 userprofile_router = routers.NestedDefaultRouter(router, 'users', lookup='user')
-userprofile_router.register('profiles', UserprofileViewSet, basename='user-profiles')
+userprofile_router.register('profiles', UserProfileViewSet, basename='user-profiles')
 
 articles_router=routers.NestedDefaultRouter(router,'categories',lookup='category')
 articles_router.register('articles',NewsArticleViewSet,basename='category-articles')
-
-
-category_router = routers.NestedDefaultRouter(router, 'categories', lookup='category')
-category_router.register('articles', CategoryArticlesViewSet, basename='category-articles')
-
 
 urlpatterns = [
     path('', include(router.urls)),             
     path('', include(userprofile_router.urls)), 
     path('', include(articles_router.urls)),
-    path ('', include(category_router.urls)),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
 ]

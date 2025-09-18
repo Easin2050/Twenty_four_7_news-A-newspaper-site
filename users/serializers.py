@@ -19,4 +19,9 @@ class UserSerializer(BaseUserSerializer):
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model=UserProfile
-        fields=['user','bio','profile_pic']
+        fields=['id','bio','profile_pic']
+
+    def create(self, validated_data):
+        user = self.context['request'].user
+        profile = UserProfile.objects.create(user=user, **validated_data)
+        return profile

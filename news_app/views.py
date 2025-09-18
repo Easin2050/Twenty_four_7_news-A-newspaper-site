@@ -1,24 +1,16 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from django.db.models import Avg
 from news_app.models import NewsArticle,Category
-from news_app.serializers import NewsArticleSerializer,CategorySerializer,ReviewSerializer,CategoryArticleSerializer
+from news_app.serializers import NewsArticleSerializer,CategorySerializer,ReviewSerializer
 from users.pagination import CustomPagination
 from rest_framework.filters import SearchFilter,OrderingFilter
 from rest_framework.permissions import IsAdminUser,AllowAny
 
-class CategoryArticlesViewSet(viewsets.ReadOnlyModelViewSet):
-    serializer_class = CategoryArticleSerializer
-    lookup_field = 'category_id'
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset=Category.objects.prefetch_related('articles').all()
+    serializer_class=CategorySerializer
+    SearchFilter=['name']
 
-    def get_queryset(self):
-        category_id = self.kwargs['category_id']
-        return (
-            NewsArticle.objects.filter(category_id=category_id)
-            .annotate(avg_rating=Avg('ratings__value'))
-            .order_by('-avg_rating', '-published_date')
-        )
-    
     def get_permissions(self):
         if self.request.method=='GET':
             return [AllowAny()]
