@@ -19,7 +19,15 @@ class CategoryArticleSerializer(serializers.ModelSerializer):
 class NewsArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model=NewsArticle
-        fields=['title','body','category','published_date']
+        fields=['id','title','body','category','published_date']
+
+
+class ArticleViewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=NewsArticle
+        fields=['id','title','body']
+
+
 
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:

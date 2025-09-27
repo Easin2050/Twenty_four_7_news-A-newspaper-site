@@ -1,0 +1,582 @@
+[
+  {
+    "model": "news_app.Category",
+    "pk": 1,
+    "fields": {
+      "name": "Politics",
+      "description": "News about government and political events."
+    }
+  },
+  {
+    "model": "news_app.Category",
+    "pk": 2,
+    "fields": {
+      "name": "Technology",
+      "description": "Updates on tech innovations and companies."
+    }
+  },
+  {
+    "model": "news_app.Category",
+    "pk": 3,
+    "fields": {
+      "name": "Sports",
+      "description": "Coverage of sports events and players."
+    }
+  },
+  {
+    "model": "news_app.Category",
+    "pk": 4,
+    "fields": {
+      "name": "Entertainment",
+      "description": "Movies, music, and celebrity news."
+    }
+  },
+  {
+    "model": "news_app.Category",
+    "pk": 5,
+    "fields": {
+      "name": "Health",
+      "description": "News about health and wellness."
+    }
+  },
+  {
+    "model": "news_app.Category",
+    "pk": 6,
+    "fields": {
+      "name": "Science",
+      "description": "Discoveries and research in science."
+    }
+  },
+  {
+    "model": "news_app.Category",
+    "pk": 7,
+    "fields": {
+      "name": "Business",
+      "description": "News about companies, markets, and economy."
+    }
+  },
+  {
+    "model": "news_app.Category",
+    "pk": 8,
+    "fields": {
+      "name": "Education",
+      "description": "Schools, colleges, and learning updates."
+    }
+  },
+  {
+    "model": "news_app.Category",
+    "pk": 9,
+    "fields": {
+      "name": "World",
+      "description": "Global events and international relations."
+    }
+  },
+  {
+    "model": "news_app.Category",
+    "pk": 10,
+    "fields": {
+      "name": "Travel",
+      "description": "Places, cultures, and travel experiences."
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 1,
+    "fields": {
+      "title": "Politics Article 1",
+      "body": "This is the body content for Politics article number 1. It covers detailed insights and analysis.",
+      "category": 1,
+      "published_date": "2025-09-02T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 2,
+    "fields": {
+      "title": "Politics Article 2",
+      "body": "This is the body content for Politics article number 2. It covers detailed insights and analysis.",
+      "category": 1,
+      "published_date": "2025-09-03T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 3,
+    "fields": {
+      "title": "Politics Article 3",
+      "body": "This is the body content for Politics article number 3. It covers detailed insights and analysis.",
+      "category": 1,
+      "published_date": "2025-09-04T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 4,
+    "fields": {
+      "title": "Politics Article 4",
+      "body": "This is the body content for Politics article number 4. It covers detailed insights and analysis.",
+      "category": 1,
+      "published_date": "2025-09-05T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 5,
+    "fields": {
+      "title": "Politics Article 5",
+      "body": "This is the body content for Politics article number 5. It covers detailed insights and analysis.",
+      "category": 1,
+      "published_date": "2025-09-06T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 6,
+    "fields": {
+      "title": "Technology Article 1",
+      "body": "This is the body content for Technology article number 1. It covers detailed insights and analysis.",
+      "category": 2,
+      "published_date": "2025-09-07T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 7,
+    "fields": {
+      "title": "Technology Article 2",
+      "body": "This is the body content for Technology article number 2. It covers detailed insights and analysis.",
+      "category": 2,
+      "published_date": "2025-09-08T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 8,
+    "fields": {
+      "title": "Technology Article 3",
+      "body": "This is the body content for Technology article number 3. It covers detailed insights and analysis.",
+      "category": 2,
+      "published_date": "2025-09-09T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 9,
+    "fields": {
+      "title": "Technology Article 4",
+      "body": "This is the body content for Technology article number 4. It covers detailed insights and analysis.",
+      "category": 2,
+      "published_date": "2025-09-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 10,
+    "fields": {
+      "title": "Technology Article 5",
+      "body": "This is the body content for Technology article number 5. It covers detailed insights and analysis.",
+      "category": 2,
+      "published_date": "2025-09-11T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 11,
+    "fields": {
+      "title": "Sports Article 1",
+      "body": "This is the body content for Sports article number 1. It covers detailed insights and analysis.",
+      "category": 3,
+      "published_date": "2025-09-12T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 12,
+    "fields": {
+      "title": "Sports Article 2",
+      "body": "This is the body content for Sports article number 2. It covers detailed insights and analysis.",
+      "category": 3,
+      "published_date": "2025-09-13T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 13,
+    "fields": {
+      "title": "Sports Article 3",
+      "body": "This is the body content for Sports article number 3. It covers detailed insights and analysis.",
+      "category": 3,
+      "published_date": "2025-09-14T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 14,
+    "fields": {
+      "title": "Sports Article 4",
+      "body": "This is the body content for Sports article number 4. It covers detailed insights and analysis.",
+      "category": 3,
+      "published_date": "2025-09-15T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 15,
+    "fields": {
+      "title": "Sports Article 5",
+      "body": "This is the body content for Sports article number 5. It covers detailed insights and analysis.",
+      "category": 3,
+      "published_date": "2025-09-16T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 16,
+    "fields": {
+      "title": "Entertainment Article 1",
+      "body": "This is the body content for Entertainment article number 1. It covers detailed insights and analysis.",
+      "category": 4,
+      "published_date": "2025-09-17T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 17,
+    "fields": {
+      "title": "Entertainment Article 2",
+      "body": "This is the body content for Entertainment article number 2. It covers detailed insights and analysis.",
+      "category": 4,
+      "published_date": "2025-09-18T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 18,
+    "fields": {
+      "title": "Entertainment Article 3",
+      "body": "This is the body content for Entertainment article number 3. It covers detailed insights and analysis.",
+      "category": 4,
+      "published_date": "2025-09-19T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 19,
+    "fields": {
+      "title": "Entertainment Article 4",
+      "body": "This is the body content for Entertainment article number 4. It covers detailed insights and analysis.",
+      "category": 4,
+      "published_date": "2025-09-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 20,
+    "fields": {
+      "title": "Entertainment Article 5",
+      "body": "This is the body content for Entertainment article number 5. It covers detailed insights and analysis.",
+      "category": 4,
+      "published_date": "2025-09-21T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 21,
+    "fields": {
+      "title": "Health Article 1",
+      "body": "This is the body content for Health article number 1. It covers detailed insights and analysis.",
+      "category": 5,
+      "published_date": "2025-09-22T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 22,
+    "fields": {
+      "title": "Health Article 2",
+      "body": "This is the body content for Health article number 2. It covers detailed insights and analysis.",
+      "category": 5,
+      "published_date": "2025-09-23T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 23,
+    "fields": {
+      "title": "Health Article 3",
+      "body": "This is the body content for Health article number 3. It covers detailed insights and analysis.",
+      "category": 5,
+      "published_date": "2025-09-24T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 24,
+    "fields": {
+      "title": "Health Article 4",
+      "body": "This is the body content for Health article number 4. It covers detailed insights and analysis.",
+      "category": 5,
+      "published_date": "2025-09-25T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 25,
+    "fields": {
+      "title": "Health Article 5",
+      "body": "This is the body content for Health article number 5. It covers detailed insights and analysis.",
+      "category": 5,
+      "published_date": "2025-09-26T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 26,
+    "fields": {
+      "title": "Science Article 1",
+      "body": "This is the body content for Science article number 1. It covers detailed insights and analysis.",
+      "category": 6,
+      "published_date": "2025-09-27T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 27,
+    "fields": {
+      "title": "Science Article 2",
+      "body": "This is the body content for Science article number 2. It covers detailed insights and analysis.",
+      "category": 6,
+      "published_date": "2025-09-28T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 28,
+    "fields": {
+      "title": "Science Article 3",
+      "body": "This is the body content for Science article number 3. It covers detailed insights and analysis.",
+      "category": 6,
+      "published_date": "2025-09-29T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 29,
+    "fields": {
+      "title": "Science Article 4",
+      "body": "This is the body content for Science article number 4. It covers detailed insights and analysis.",
+      "category": 6,
+      "published_date": "2025-09-30T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 30,
+    "fields": {
+      "title": "Science Article 5",
+      "body": "This is the body content for Science article number 5. It covers detailed insights and analysis.",
+      "category": 6,
+      "published_date": "2025-10-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 31,
+    "fields": {
+      "title": "Business Article 1",
+      "body": "This is the body content for Business article number 1. It covers detailed insights and analysis.",
+      "category": 7,
+      "published_date": "2025-10-02T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 32,
+    "fields": {
+      "title": "Business Article 2",
+      "body": "This is the body content for Business article number 2. It covers detailed insights and analysis.",
+      "category": 7,
+      "published_date": "2025-10-03T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 33,
+    "fields": {
+      "title": "Business Article 3",
+      "body": "This is the body content for Business article number 3. It covers detailed insights and analysis.",
+      "category": 7,
+      "published_date": "2025-10-04T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 34,
+    "fields": {
+      "title": "Business Article 4",
+      "body": "This is the body content for Business article number 4. It covers detailed insights and analysis.",
+      "category": 7,
+      "published_date": "2025-10-05T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 35,
+    "fields": {
+      "title": "Business Article 5",
+      "body": "This is the body content for Business article number 5. It covers detailed insights and analysis.",
+      "category": 7,
+      "published_date": "2025-10-06T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 36,
+    "fields": {
+      "title": "Education Article 1",
+      "body": "This is the body content for Education article number 1. It covers detailed insights and analysis.",
+      "category": 8,
+      "published_date": "2025-10-07T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 37,
+    "fields": {
+      "title": "Education Article 2",
+      "body": "This is the body content for Education article number 2. It covers detailed insights and analysis.",
+      "category": 8,
+      "published_date": "2025-10-08T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 38,
+    "fields": {
+      "title": "Education Article 3",
+      "body": "This is the body content for Education article number 3. It covers detailed insights and analysis.",
+      "category": 8,
+      "published_date": "2025-10-09T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 39,
+    "fields": {
+      "title": "Education Article 4",
+      "body": "This is the body content for Education article number 4. It covers detailed insights and analysis.",
+      "category": 8,
+      "published_date": "2025-10-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 40,
+    "fields": {
+      "title": "Education Article 5",
+      "body": "This is the body content for Education article number 5. It covers detailed insights and analysis.",
+      "category": 8,
+      "published_date": "2025-10-11T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 41,
+    "fields": {
+      "title": "World Article 1",
+      "body": "This is the body content for World article number 1. It covers detailed insights and analysis.",
+      "category": 9,
+      "published_date": "2025-10-12T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 42,
+    "fields": {
+      "title": "World Article 2",
+      "body": "This is the body content for World article number 2. It covers detailed insights and analysis.",
+      "category": 9,
+      "published_date": "2025-10-13T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 43,
+    "fields": {
+      "title": "World Article 3",
+      "body": "This is the body content for World article number 3. It covers detailed insights and analysis.",
+      "category": 9,
+      "published_date": "2025-10-14T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 44,
+    "fields": {
+      "title": "World Article 4",
+      "body": "This is the body content for World article number 4. It covers detailed insights and analysis.",
+      "category": 9,
+      "published_date": "2025-10-15T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 45,
+    "fields": {
+      "title": "World Article 5",
+      "body": "This is the body content for World article number 5. It covers detailed insights and analysis.",
+      "category": 9,
+      "published_date": "2025-10-16T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 46,
+    "fields": {
+      "title": "Travel Article 1",
+      "body": "This is the body content for Travel article number 1. It covers detailed insights and analysis.",
+      "category": 10,
+      "published_date": "2025-10-17T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 47,
+    "fields": {
+      "title": "Travel Article 2",
+      "body": "This is the body content for Travel article number 2. It covers detailed insights and analysis.",
+      "category": 10,
+      "published_date": "2025-10-18T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 48,
+    "fields": {
+      "title": "Travel Article 3",
+      "body": "This is the body content for Travel article number 3. It covers detailed insights and analysis.",
+      "category": 10,
+      "published_date": "2025-10-19T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 49,
+    "fields": {
+      "title": "Travel Article 4",
+      "body": "This is the body content for Travel article number 4. It covers detailed insights and analysis.",
+      "category": 10,
+      "published_date": "2025-10-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.NewsArticle",
+    "pk": 50,
+    "fields": {
+      "title": "Travel Article 5",
+      "body": "This is the body content for Travel article number 5. It covers detailed insights and analysis.",
+      "category": 10,
+      "published_date": "2025-10-21T10:00:00Z"
+    }
+  }
+]
