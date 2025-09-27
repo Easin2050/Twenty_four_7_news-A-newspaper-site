@@ -22,6 +22,8 @@ class CategoryViewSet(viewsets.ModelViewSet):
 class CategoryArticleViewSet(viewsets.ModelViewSet):
     serializer_class = CategoryArticleSerializer
     permission_classes = [AllowAny]
+    search_fields = ['title', 'body']
+    filter_backends = [SearchFilter, OrderingFilter]
 
     def get_queryset(self):
         category_id = self.kwargs.get('category_pk')
@@ -36,6 +38,8 @@ class NewsArticleViewSet(viewsets.ModelViewSet):
     queryset=NewsArticle.objects.all()
     serializer_class=NewsArticleSerializer
     pagination_class=CustomPagination
+    search_fields=['title','body']
+    filter_backends=[SearchFilter,OrderingFilter]
 
     def get_permissions(self):
         if self.request.method=='GET':
@@ -45,6 +49,7 @@ class NewsArticleViewSet(viewsets.ModelViewSet):
 
 class ArticleDetailsViewSet(viewsets.ModelViewSet):
     serializer_class = ArticleViewSerializer
+    search_fields = ['title']
 
     def get_queryset(self):
         article_id = self.kwargs.get('article_pk')
@@ -59,7 +64,7 @@ class ArticleDetailsViewSet(viewsets.ModelViewSet):
         )
         data = {
             "article": ArticleViewSerializer(article).data,
-            "related_articles": [
+            "Similiar news": [
                 {"id": r.id, "title": r.title} for r in related
             ],
         }
@@ -72,7 +77,9 @@ class ArticleDetailsViewSet(viewsets.ModelViewSet):
 
 
 class ReviewViewSet(viewsets.ModelViewSet):
-    queryset = NewsArticle.objects.prefetch_related('ratings').all()
     serializer_class = ReviewSerializer
-
+    
+    def get_queryset(self):
+        article_id = self.kwargs.get('article_pk')
+        return NewsArticle.objects.get(id=article_id).ratings.all()
 
