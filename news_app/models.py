@@ -25,4 +25,4 @@ class Rating(models.Model):
     ratings = models.PositiveIntegerField(validators=[MinValueValidator(1), MaxValueValidator(4)])
 
     def __str__(self):
-        return f'Rating {self.value} for {self.article.title} by {self.user.username}'
+        return f'Rating {self.ratings} for {self.article.title} by {self.user.username}'

@@ -2,12 +2,12 @@ from django.shortcuts import render
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import viewsets
-from news_app.models import NewsArticle,Category
+from news_app.models import NewsArticle,Category,Rating
 from news_app.serializers import NewsArticleSerializer,CategorySerializer,ReviewSerializer,CategoryArticleSerializer,ArticleViewSerializer
 from users.pagination import CustomPagination
 from rest_framework.filters import SearchFilter,OrderingFilter
 from rest_framework.permissions import IsAdminUser,AllowAny
-from api.permissions import IsAdminOrReadOnly
+from api.permissions import IsAdminOrReadOnly,IsReviewOwnerOrReadOnly
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset=Category.objects.prefetch_related('articles').all()
@@ -78,8 +78,17 @@ class ArticleDetailsViewSet(viewsets.ModelViewSet):
 
 class ReviewViewSet(viewsets.ModelViewSet):
     serializer_class = ReviewSerializer
-    
+    permission_classes = [IsReviewOwnerOrReadOnly]  
+
     def get_queryset(self):
         article_id = self.kwargs.get('article_pk')
-        return NewsArticle.objects.get(id=article_id).ratings.all()
+        return Rating.objects.filter(article_id=article_id)
+
+    def perform_create(self, serializer):
+        article_id = self.kwargs.get('article_pk')
+        serializer.save(
+            user=self.request.user,   
+            article_id=article_id    
+        )
+
 
