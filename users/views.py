@@ -12,13 +12,19 @@ from rest_framework.mixins import CreateModelMixin,RetrieveModelMixin,UpdateMode
 from api.permissions import IsProfileOwner
 
 class UserViewSet(ModelViewSet):
-    serializer_class=UserSerializer
-    pagination_class=CustomPagination
-    
+    serializer_class = UserSerializer
+    pagination_class = CustomPagination
+    http_method_names = ["get", "put", "patch"]  
+
     def get_queryset(self):
         if self.request.user.is_superuser:
             return get_user_model().objects.all()
         return get_user_model().objects.filter(id=self.request.user.id)
+
+    def get_permissions(self):
+        if self.request.method in ["GET", "PUT", "PATCH"]:
+            return [IsAuthenticated()]
+        return [IsAdminUser()]
     
     
 class UserProfileViewSet(GenericViewSet, RetrieveModelMixin, CreateModelMixin, UpdateModelMixin):

@@ -14,10 +14,10 @@ class CategoryViewSet(viewsets.ModelViewSet):
     serializer_class=CategorySerializer
     search_fields=['name']
 
-    def get_permissions(self):
+    '''def get_permissions(self):
         if self.request.method=='GET':
             return [AllowAny()]
-        return [IsAdminOrReadOnly()]
+        return [IsAdminOrReadOnly()]'''
 
 class CategoryArticleViewSet(viewsets.ModelViewSet):
     serializer_class = CategoryArticleSerializer
