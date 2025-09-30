@@ -7,7 +7,7 @@ from news_app.serializers import NewsArticleSerializer,CategorySerializer,Review
 from users.pagination import CustomPagination
 from rest_framework.filters import SearchFilter,OrderingFilter
 from rest_framework.permissions import IsAdminUser,AllowAny
-from api.permissions import IsAdminOrReadOnly,IsReviewOwnerOrReadOnly
+from api.permissions import IsAdminOrReadOnly,IsReviewOwnerOrReadOnly,IsEditorOrReadOnly
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset=Category.objects.prefetch_related('articles').all()
@@ -41,10 +41,26 @@ class NewsArticleViewSet(viewsets.ModelViewSet):
     search_fields=['title','body']
     filter_backends=[SearchFilter,OrderingFilter]
 
+
     def get_permissions(self):
         if self.request.method=='GET':
             return [AllowAny()]
-        return [IsAdminOrReadOnly()]
+        return [IsEditorOrReadOnly()]
+
+    def perform_create(self,serializer):
+        editor=self.request.user
+        serializer.save(editor=editor)
+
+    def perform_update(self, serializer):
+        if self.get_object().editor != self.request.user:
+            raise ValueError("You can only update your own articles.")
+        serializer.save()
+    
+    def perform_destroy(self, instance):
+        if instance.editor != self.request.user:
+            raise ValueError("You can only delete your own articles.")
+        instance.delete()
+
 
 
 class ArticleDetailsViewSet(viewsets.ModelViewSet):

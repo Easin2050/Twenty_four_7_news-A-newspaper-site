@@ -14,6 +14,7 @@ class UserSerializer(BaseUserSerializer):
         ref_name = "CustomUserCreate" 
         fields = ['id', 'email', 'first_name',
                   'last_name','role']
+        read_only_fields=['role']
         
 
 class UserProfileSerializer(serializers.ModelSerializer):
@@ -21,7 +22,4 @@ class UserProfileSerializer(serializers.ModelSerializer):
         model=UserProfile
         fields=['id','bio','profile_pic']
 
-    def create(self, validated_data):
-        user = self.context['request'].user
-        profile = UserProfile.objects.create(user=user, **validated_data)
-        return profile
+    

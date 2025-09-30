@@ -1,5 +1,6 @@
 from rest_framework import status
 from rest_framework.response import Response
+from rest_framework.exceptions import ValidationError
 from rest_framework.viewsets import ModelViewSet,GenericViewSet
 from users.models import User, UserProfile
 from users.serializers import UserSerializer,UserProfileSerializer
@@ -18,8 +19,8 @@ class UserViewSet(ModelViewSet):
         if self.request.user.is_superuser:
             return get_user_model().objects.all()
         return get_user_model().objects.filter(id=self.request.user.id)
-
-
+    
+    
 class UserProfileViewSet(GenericViewSet, RetrieveModelMixin, CreateModelMixin, UpdateModelMixin):
     serializer_class = UserProfileSerializer
     permission_classes = [IsAuthenticated, IsProfileOwner]
@@ -27,10 +28,9 @@ class UserProfileViewSet(GenericViewSet, RetrieveModelMixin, CreateModelMixin, U
     def get_queryset(self):
         return UserProfile.objects.filter(user=self.request.user)
 
-    def create(self, request, *args, **kwargs):
-        if UserProfile.objects.filter(user=request.user).exists():
-            return Response(
-                {"detail": "Profile already exists."},
-                status=status.HTTP_400_BAD_REQUEST
-            )
-        return super().create(request, *args, **kwargs)
+    def perform_create(self, serializer):
+        if UserProfile.objects.filter(user=self.request.user).exists():
+            raise ValidationError({"detail": "Profile already exists."})
+        serializer.save(user=self.request.user)
+
+    
