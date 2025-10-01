@@ -20,563 +20,1473 @@
     "pk": 3,
     "fields": {
       "name": "Sports",
-      "description": "Coverage of sports events and players."
+      "description": "Coverage of sporting events and athletes."
     }
   },
   {
     "model": "news_app.Category",
     "pk": 4,
     "fields": {
-      "name": "Entertainment",
-      "description": "Movies, music, and celebrity news."
+      "name": "Health",
+      "description": "Information on health and wellness."
     }
   },
   {
     "model": "news_app.Category",
     "pk": 5,
     "fields": {
-      "name": "Health",
-      "description": "News about health and wellness."
-    }
-  },
-  {
-    "model": "news_app.Category",
-    "pk": 6,
-    "fields": {
-      "name": "Science",
-      "description": "Discoveries and research in science."
-    }
-  },
-  {
-    "model": "news_app.Category",
-    "pk": 7,
-    "fields": {
-      "name": "Business",
-      "description": "News about companies, markets, and economy."
-    }
-  },
-  {
-    "model": "news_app.Category",
-    "pk": 8,
-    "fields": {
-      "name": "Education",
-      "description": "Schools, colleges, and learning updates."
-    }
-  },
-  {
-    "model": "news_app.Category",
-    "pk": 9,
-    "fields": {
-      "name": "World",
-      "description": "Global events and international relations."
-    }
-  },
-  {
-    "model": "news_app.Category",
-    "pk": 10,
-    "fields": {
-      "name": "Travel",
-      "description": "Places, cultures, and travel experiences."
+      "name": "Entertainment",
+      "description": "Celebrity news and popular culture."
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 1,
     "fields": {
-      "title": "Politics Article 1",
-      "body": "This is the body content for Politics article number 1. It covers detailed insights and analysis.",
-      "category": 1,
-      "published_date": "2025-09-02T10:00:00Z"
+      "title": "Sports Article 1",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 3,
+      "published_date": "2025-01-02T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 2,
     "fields": {
-      "title": "Politics Article 2",
-      "body": "This is the body content for Politics article number 2. It covers detailed insights and analysis.",
-      "category": 1,
-      "published_date": "2025-09-03T10:00:00Z"
+      "title": "Sports Article 2",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 3,
+      "published_date": "2025-01-03T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 3,
     "fields": {
-      "title": "Politics Article 3",
-      "body": "This is the body content for Politics article number 3. It covers detailed insights and analysis.",
-      "category": 1,
-      "published_date": "2025-09-04T10:00:00Z"
+      "title": "Technology Article 3",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 2,
+      "published_date": "2025-01-04T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 4,
     "fields": {
-      "title": "Politics Article 4",
-      "body": "This is the body content for Politics article number 4. It covers detailed insights and analysis.",
-      "category": 1,
-      "published_date": "2025-09-05T10:00:00Z"
+      "title": "Sports Article 4",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 3,
+      "published_date": "2025-01-05T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 5,
     "fields": {
-      "title": "Politics Article 5",
-      "body": "This is the body content for Politics article number 5. It covers detailed insights and analysis.",
-      "category": 1,
-      "published_date": "2025-09-06T10:00:00Z"
+      "title": "Sports Article 5",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 3,
+      "published_date": "2025-01-06T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 6,
     "fields": {
-      "title": "Technology Article 1",
-      "body": "This is the body content for Technology article number 1. It covers detailed insights and analysis.",
-      "category": 2,
-      "published_date": "2025-09-07T10:00:00Z"
+      "title": "Health Article 6",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 4,
+      "published_date": "2025-01-07T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 7,
     "fields": {
-      "title": "Technology Article 2",
-      "body": "This is the body content for Technology article number 2. It covers detailed insights and analysis.",
-      "category": 2,
-      "published_date": "2025-09-08T10:00:00Z"
+      "title": "Sports Article 7",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 3,
+      "published_date": "2025-01-08T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 8,
     "fields": {
-      "title": "Technology Article 3",
-      "body": "This is the body content for Technology article number 3. It covers detailed insights and analysis.",
-      "category": 2,
-      "published_date": "2025-09-09T10:00:00Z"
+      "title": "Politics Article 8",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 1,
+      "published_date": "2025-01-09T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 9,
     "fields": {
-      "title": "Technology Article 4",
-      "body": "This is the body content for Technology article number 4. It covers detailed insights and analysis.",
-      "category": 2,
-      "published_date": "2025-09-10T10:00:00Z"
+      "title": "Sports Article 9",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 3,
+      "published_date": "2025-01-10T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 10,
     "fields": {
-      "title": "Technology Article 5",
-      "body": "This is the body content for Technology article number 5. It covers detailed insights and analysis.",
-      "category": 2,
-      "published_date": "2025-09-11T10:00:00Z"
+      "title": "Politics Article 10",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 1,
+      "published_date": "2025-01-11T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 11,
     "fields": {
-      "title": "Sports Article 1",
-      "body": "This is the body content for Sports article number 1. It covers detailed insights and analysis.",
+      "title": "Sports Article 11",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
       "category": 3,
-      "published_date": "2025-09-12T10:00:00Z"
+      "published_date": "2025-01-12T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 12,
     "fields": {
-      "title": "Sports Article 2",
-      "body": "This is the body content for Sports article number 2. It covers detailed insights and analysis.",
+      "title": "Sports Article 12",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
       "category": 3,
-      "published_date": "2025-09-13T10:00:00Z"
+      "published_date": "2025-01-13T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 13,
     "fields": {
-      "title": "Sports Article 3",
-      "body": "This is the body content for Sports article number 3. It covers detailed insights and analysis.",
+      "title": "Sports Article 13",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
       "category": 3,
-      "published_date": "2025-09-14T10:00:00Z"
+      "published_date": "2025-01-14T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 14,
     "fields": {
-      "title": "Sports Article 4",
-      "body": "This is the body content for Sports article number 4. It covers detailed insights and analysis.",
-      "category": 3,
-      "published_date": "2025-09-15T10:00:00Z"
+      "title": "Health Article 14",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 4,
+      "published_date": "2025-01-15T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 15,
     "fields": {
-      "title": "Sports Article 5",
-      "body": "This is the body content for Sports article number 5. It covers detailed insights and analysis.",
-      "category": 3,
-      "published_date": "2025-09-16T10:00:00Z"
+      "title": "Health Article 15",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 4,
+      "published_date": "2025-01-16T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 16,
     "fields": {
-      "title": "Entertainment Article 1",
-      "body": "This is the body content for Entertainment article number 1. It covers detailed insights and analysis.",
+      "title": "Health Article 16",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
       "category": 4,
-      "published_date": "2025-09-17T10:00:00Z"
+      "published_date": "2025-01-17T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 17,
     "fields": {
-      "title": "Entertainment Article 2",
-      "body": "This is the body content for Entertainment article number 2. It covers detailed insights and analysis.",
-      "category": 4,
-      "published_date": "2025-09-18T10:00:00Z"
+      "title": "Politics Article 17",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 1,
+      "published_date": "2025-01-18T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 18,
     "fields": {
-      "title": "Entertainment Article 3",
-      "body": "This is the body content for Entertainment article number 3. It covers detailed insights and analysis.",
-      "category": 4,
-      "published_date": "2025-09-19T10:00:00Z"
+      "title": "Sports Article 18",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 3,
+      "published_date": "2025-01-19T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 19,
     "fields": {
-      "title": "Entertainment Article 4",
-      "body": "This is the body content for Entertainment article number 4. It covers detailed insights and analysis.",
-      "category": 4,
-      "published_date": "2025-09-20T10:00:00Z"
+      "title": "Technology Article 19",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 2,
+      "published_date": "2025-01-20T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 20,
     "fields": {
-      "title": "Entertainment Article 5",
-      "body": "This is the body content for Entertainment article number 5. It covers detailed insights and analysis.",
-      "category": 4,
-      "published_date": "2025-09-21T10:00:00Z"
+      "title": "Technology Article 20",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 2,
+      "published_date": "2025-01-21T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 21,
     "fields": {
-      "title": "Health Article 1",
-      "body": "This is the body content for Health article number 1. It covers detailed insights and analysis.",
-      "category": 5,
-      "published_date": "2025-09-22T10:00:00Z"
+      "title": "Sports Article 21",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 3,
+      "published_date": "2025-01-22T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 22,
     "fields": {
-      "title": "Health Article 2",
-      "body": "This is the body content for Health article number 2. It covers detailed insights and analysis.",
-      "category": 5,
-      "published_date": "2025-09-23T10:00:00Z"
+      "title": "Politics Article 22",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 1,
+      "published_date": "2025-01-23T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 23,
     "fields": {
-      "title": "Health Article 3",
-      "body": "This is the body content for Health article number 3. It covers detailed insights and analysis.",
+      "title": "Entertainment Article 23",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
       "category": 5,
-      "published_date": "2025-09-24T10:00:00Z"
+      "published_date": "2025-01-24T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 24,
     "fields": {
-      "title": "Health Article 4",
-      "body": "This is the body content for Health article number 4. It covers detailed insights and analysis.",
-      "category": 5,
-      "published_date": "2025-09-25T10:00:00Z"
+      "title": "Politics Article 24",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 1,
+      "published_date": "2025-01-25T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 25,
     "fields": {
-      "title": "Health Article 5",
-      "body": "This is the body content for Health article number 5. It covers detailed insights and analysis.",
-      "category": 5,
-      "published_date": "2025-09-26T10:00:00Z"
+      "title": "Sports Article 25",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 3,
+      "published_date": "2025-01-26T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 26,
     "fields": {
-      "title": "Science Article 1",
-      "body": "This is the body content for Science article number 1. It covers detailed insights and analysis.",
-      "category": 6,
-      "published_date": "2025-09-27T10:00:00Z"
+      "title": "Technology Article 26",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 2,
+      "published_date": "2025-01-27T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 27,
     "fields": {
-      "title": "Science Article 2",
-      "body": "This is the body content for Science article number 2. It covers detailed insights and analysis.",
-      "category": 6,
-      "published_date": "2025-09-28T10:00:00Z"
+      "title": "Sports Article 27",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 3,
+      "published_date": "2025-01-28T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 28,
     "fields": {
-      "title": "Science Article 3",
-      "body": "This is the body content for Science article number 3. It covers detailed insights and analysis.",
-      "category": 6,
-      "published_date": "2025-09-29T10:00:00Z"
+      "title": "Politics Article 28",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 1,
+      "published_date": "2025-01-29T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 29,
     "fields": {
-      "title": "Science Article 4",
-      "body": "This is the body content for Science article number 4. It covers detailed insights and analysis.",
-      "category": 6,
-      "published_date": "2025-09-30T10:00:00Z"
+      "title": "Health Article 29",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 4,
+      "published_date": "2025-01-30T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 30,
     "fields": {
-      "title": "Science Article 5",
-      "body": "This is the body content for Science article number 5. It covers detailed insights and analysis.",
-      "category": 6,
-      "published_date": "2025-10-01T10:00:00Z"
+      "title": "Technology Article 30",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 2,
+      "published_date": "2025-01-31T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 31,
     "fields": {
-      "title": "Business Article 1",
-      "body": "This is the body content for Business article number 1. It covers detailed insights and analysis.",
-      "category": 7,
-      "published_date": "2025-10-02T10:00:00Z"
+      "title": "Politics Article 31",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 1,
+      "published_date": "2025-02-01T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 32,
     "fields": {
-      "title": "Business Article 2",
-      "body": "This is the body content for Business article number 2. It covers detailed insights and analysis.",
-      "category": 7,
-      "published_date": "2025-10-03T10:00:00Z"
+      "title": "Entertainment Article 32",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 5,
+      "published_date": "2025-02-02T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 33,
     "fields": {
-      "title": "Business Article 3",
-      "body": "This is the body content for Business article number 3. It covers detailed insights and analysis.",
-      "category": 7,
-      "published_date": "2025-10-04T10:00:00Z"
+      "title": "Sports Article 33",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 3,
+      "published_date": "2025-02-03T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 34,
     "fields": {
-      "title": "Business Article 4",
-      "body": "This is the body content for Business article number 4. It covers detailed insights and analysis.",
-      "category": 7,
-      "published_date": "2025-10-05T10:00:00Z"
+      "title": "Sports Article 34",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 3,
+      "published_date": "2025-02-04T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 35,
     "fields": {
-      "title": "Business Article 5",
-      "body": "This is the body content for Business article number 5. It covers detailed insights and analysis.",
-      "category": 7,
-      "published_date": "2025-10-06T10:00:00Z"
+      "title": "Sports Article 35",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 3,
+      "published_date": "2025-02-05T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 36,
     "fields": {
-      "title": "Education Article 1",
-      "body": "This is the body content for Education article number 1. It covers detailed insights and analysis.",
-      "category": 8,
-      "published_date": "2025-10-07T10:00:00Z"
+      "title": "Politics Article 36",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 1,
+      "published_date": "2025-02-06T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 37,
     "fields": {
-      "title": "Education Article 2",
-      "body": "This is the body content for Education article number 2. It covers detailed insights and analysis.",
-      "category": 8,
-      "published_date": "2025-10-08T10:00:00Z"
+      "title": "Politics Article 37",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 1,
+      "published_date": "2025-02-07T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 38,
     "fields": {
-      "title": "Education Article 3",
-      "body": "This is the body content for Education article number 3. It covers detailed insights and analysis.",
-      "category": 8,
-      "published_date": "2025-10-09T10:00:00Z"
+      "title": "Technology Article 38",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 2,
+      "published_date": "2025-02-08T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 39,
     "fields": {
-      "title": "Education Article 4",
-      "body": "This is the body content for Education article number 4. It covers detailed insights and analysis.",
-      "category": 8,
-      "published_date": "2025-10-10T10:00:00Z"
+      "title": "Entertainment Article 39",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 5,
+      "published_date": "2025-02-09T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 40,
     "fields": {
-      "title": "Education Article 5",
-      "body": "This is the body content for Education article number 5. It covers detailed insights and analysis.",
-      "category": 8,
-      "published_date": "2025-10-11T10:00:00Z"
+      "title": "Politics Article 40",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 1,
+      "published_date": "2025-02-10T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 41,
     "fields": {
-      "title": "World Article 1",
-      "body": "This is the body content for World article number 1. It covers detailed insights and analysis.",
-      "category": 9,
-      "published_date": "2025-10-12T10:00:00Z"
+      "title": "Sports Article 41",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 3,
+      "published_date": "2025-02-11T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 42,
     "fields": {
-      "title": "World Article 2",
-      "body": "This is the body content for World article number 2. It covers detailed insights and analysis.",
-      "category": 9,
-      "published_date": "2025-10-13T10:00:00Z"
+      "title": "Health Article 42",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 4,
+      "published_date": "2025-02-12T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 43,
     "fields": {
-      "title": "World Article 3",
-      "body": "This is the body content for World article number 3. It covers detailed insights and analysis.",
-      "category": 9,
-      "published_date": "2025-10-14T10:00:00Z"
+      "title": "Sports Article 43",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 3,
+      "published_date": "2025-02-13T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 44,
     "fields": {
-      "title": "World Article 4",
-      "body": "This is the body content for World article number 4. It covers detailed insights and analysis.",
-      "category": 9,
-      "published_date": "2025-10-15T10:00:00Z"
+      "title": "Technology Article 44",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 2,
+      "published_date": "2025-02-14T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 45,
     "fields": {
-      "title": "World Article 5",
-      "body": "This is the body content for World article number 5. It covers detailed insights and analysis.",
-      "category": 9,
-      "published_date": "2025-10-16T10:00:00Z"
+      "title": "Sports Article 45",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 3,
+      "published_date": "2025-02-15T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 46,
     "fields": {
-      "title": "Travel Article 1",
-      "body": "This is the body content for Travel article number 1. It covers detailed insights and analysis.",
-      "category": 10,
-      "published_date": "2025-10-17T10:00:00Z"
+      "title": "Technology Article 46",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 2,
+      "published_date": "2025-02-16T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 47,
     "fields": {
-      "title": "Travel Article 2",
-      "body": "This is the body content for Travel article number 2. It covers detailed insights and analysis.",
-      "category": 10,
-      "published_date": "2025-10-18T10:00:00Z"
+      "title": "Sports Article 47",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 3,
+      "published_date": "2025-02-17T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 48,
     "fields": {
-      "title": "Travel Article 3",
-      "body": "This is the body content for Travel article number 3. It covers detailed insights and analysis.",
-      "category": 10,
-      "published_date": "2025-10-19T10:00:00Z"
+      "title": "Entertainment Article 48",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 5,
+      "published_date": "2025-02-18T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 49,
     "fields": {
-      "title": "Travel Article 4",
-      "body": "This is the body content for Travel article number 4. It covers detailed insights and analysis.",
-      "category": 10,
-      "published_date": "2025-10-20T10:00:00Z"
+      "title": "Health Article 49",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 4,
+      "published_date": "2025-02-19T10:00:00Z"
     }
   },
   {
     "model": "news_app.NewsArticle",
     "pk": 50,
     "fields": {
-      "title": "Travel Article 5",
-      "body": "This is the body content for Travel article number 5. It covers detailed insights and analysis.",
-      "category": 10,
-      "published_date": "2025-10-21T10:00:00Z"
+      "title": "Sports Article 50",
+      "body": "This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering details, perspectives, and analysis that help readers understand the current situation. This article provides insights into the topic, offering",
+      "editor": 1,
+      "category": 3,
+      "published_date": "2025-02-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 1,
+    "fields": {
+      "article": 28,
+      "user": 1,
+      "ratings": 4
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 2,
+    "fields": {
+      "article": 34,
+      "user": 1,
+      "ratings": 2
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 3,
+    "fields": {
+      "article": 46,
+      "user": 1,
+      "ratings": 1
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 4,
+    "fields": {
+      "article": 17,
+      "user": 1,
+      "ratings": 2
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 5,
+    "fields": {
+      "article": 31,
+      "user": 1,
+      "ratings": 4
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 6,
+    "fields": {
+      "article": 17,
+      "user": 1,
+      "ratings": 2
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 7,
+    "fields": {
+      "article": 9,
+      "user": 1,
+      "ratings": 4
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 8,
+    "fields": {
+      "article": 6,
+      "user": 1,
+      "ratings": 3
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 9,
+    "fields": {
+      "article": 2,
+      "user": 1,
+      "ratings": 1
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 10,
+    "fields": {
+      "article": 5,
+      "user": 1,
+      "ratings": 2
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 11,
+    "fields": {
+      "article": 41,
+      "user": 1,
+      "ratings": 2
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 12,
+    "fields": {
+      "article": 3,
+      "user": 1,
+      "ratings": 1
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 13,
+    "fields": {
+      "article": 47,
+      "user": 1,
+      "ratings": 1
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 14,
+    "fields": {
+      "article": 19,
+      "user": 1,
+      "ratings": 3
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 15,
+    "fields": {
+      "article": 28,
+      "user": 1,
+      "ratings": 2
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 16,
+    "fields": {
+      "article": 18,
+      "user": 1,
+      "ratings": 3
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 17,
+    "fields": {
+      "article": 11,
+      "user": 1,
+      "ratings": 4
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 18,
+    "fields": {
+      "article": 12,
+      "user": 1,
+      "ratings": 1
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 19,
+    "fields": {
+      "article": 45,
+      "user": 1,
+      "ratings": 4
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 20,
+    "fields": {
+      "article": 2,
+      "user": 1,
+      "ratings": 3
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 21,
+    "fields": {
+      "article": 38,
+      "user": 1,
+      "ratings": 4
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 22,
+    "fields": {
+      "article": 45,
+      "user": 1,
+      "ratings": 4
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 23,
+    "fields": {
+      "article": 10,
+      "user": 1,
+      "ratings": 4
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 24,
+    "fields": {
+      "article": 1,
+      "user": 1,
+      "ratings": 3
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 25,
+    "fields": {
+      "article": 34,
+      "user": 1,
+      "ratings": 2
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 26,
+    "fields": {
+      "article": 16,
+      "user": 1,
+      "ratings": 2
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 27,
+    "fields": {
+      "article": 5,
+      "user": 1,
+      "ratings": 3
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 28,
+    "fields": {
+      "article": 25,
+      "user": 1,
+      "ratings": 4
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 29,
+    "fields": {
+      "article": 19,
+      "user": 1,
+      "ratings": 1
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 30,
+    "fields": {
+      "article": 1,
+      "user": 1,
+      "ratings": 2
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 31,
+    "fields": {
+      "article": 13,
+      "user": 1,
+      "ratings": 4
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 32,
+    "fields": {
+      "article": 39,
+      "user": 1,
+      "ratings": 2
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 33,
+    "fields": {
+      "article": 37,
+      "user": 1,
+      "ratings": 2
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 34,
+    "fields": {
+      "article": 38,
+      "user": 1,
+      "ratings": 3
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 35,
+    "fields": {
+      "article": 46,
+      "user": 1,
+      "ratings": 4
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 36,
+    "fields": {
+      "article": 5,
+      "user": 1,
+      "ratings": 3
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 37,
+    "fields": {
+      "article": 3,
+      "user": 1,
+      "ratings": 2
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 38,
+    "fields": {
+      "article": 16,
+      "user": 1,
+      "ratings": 1
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 39,
+    "fields": {
+      "article": 29,
+      "user": 1,
+      "ratings": 4
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 40,
+    "fields": {
+      "article": 22,
+      "user": 1,
+      "ratings": 1
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 41,
+    "fields": {
+      "article": 50,
+      "user": 1,
+      "ratings": 1
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 42,
+    "fields": {
+      "article": 29,
+      "user": 1,
+      "ratings": 1
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 43,
+    "fields": {
+      "article": 44,
+      "user": 1,
+      "ratings": 3
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 44,
+    "fields": {
+      "article": 2,
+      "user": 1,
+      "ratings": 2
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 45,
+    "fields": {
+      "article": 45,
+      "user": 1,
+      "ratings": 4
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 46,
+    "fields": {
+      "article": 38,
+      "user": 1,
+      "ratings": 4
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 47,
+    "fields": {
+      "article": 21,
+      "user": 1,
+      "ratings": 1
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 48,
+    "fields": {
+      "article": 19,
+      "user": 1,
+      "ratings": 2
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 49,
+    "fields": {
+      "article": 3,
+      "user": 1,
+      "ratings": 2
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 50,
+    "fields": {
+      "article": 42,
+      "user": 1,
+      "ratings": 2
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 51,
+    "fields": {
+      "article": 9,
+      "user": 1,
+      "ratings": 4
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 52,
+    "fields": {
+      "article": 21,
+      "user": 1,
+      "ratings": 3
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 53,
+    "fields": {
+      "article": 3,
+      "user": 1,
+      "ratings": 2
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 54,
+    "fields": {
+      "article": 30,
+      "user": 1,
+      "ratings": 4
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 55,
+    "fields": {
+      "article": 36,
+      "user": 1,
+      "ratings": 4
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 56,
+    "fields": {
+      "article": 4,
+      "user": 1,
+      "ratings": 1
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 57,
+    "fields": {
+      "article": 44,
+      "user": 1,
+      "ratings": 2
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 58,
+    "fields": {
+      "article": 28,
+      "user": 1,
+      "ratings": 4
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 59,
+    "fields": {
+      "article": 49,
+      "user": 1,
+      "ratings": 4
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 60,
+    "fields": {
+      "article": 5,
+      "user": 1,
+      "ratings": 1
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 61,
+    "fields": {
+      "article": 32,
+      "user": 1,
+      "ratings": 2
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 62,
+    "fields": {
+      "article": 22,
+      "user": 1,
+      "ratings": 3
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 63,
+    "fields": {
+      "article": 8,
+      "user": 1,
+      "ratings": 2
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 64,
+    "fields": {
+      "article": 4,
+      "user": 1,
+      "ratings": 2
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 65,
+    "fields": {
+      "article": 42,
+      "user": 1,
+      "ratings": 1
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 66,
+    "fields": {
+      "article": 22,
+      "user": 1,
+      "ratings": 3
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 67,
+    "fields": {
+      "article": 13,
+      "user": 1,
+      "ratings": 1
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 68,
+    "fields": {
+      "article": 26,
+      "user": 1,
+      "ratings": 2
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 69,
+    "fields": {
+      "article": 5,
+      "user": 1,
+      "ratings": 2
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 70,
+    "fields": {
+      "article": 46,
+      "user": 1,
+      "ratings": 4
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 71,
+    "fields": {
+      "article": 47,
+      "user": 1,
+      "ratings": 1
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 72,
+    "fields": {
+      "article": 23,
+      "user": 1,
+      "ratings": 4
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 73,
+    "fields": {
+      "article": 30,
+      "user": 1,
+      "ratings": 1
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 74,
+    "fields": {
+      "article": 34,
+      "user": 1,
+      "ratings": 4
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 75,
+    "fields": {
+      "article": 7,
+      "user": 1,
+      "ratings": 2
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 76,
+    "fields": {
+      "article": 20,
+      "user": 1,
+      "ratings": 4
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 77,
+    "fields": {
+      "article": 3,
+      "user": 1,
+      "ratings": 1
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 78,
+    "fields": {
+      "article": 50,
+      "user": 1,
+      "ratings": 3
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 79,
+    "fields": {
+      "article": 2,
+      "user": 1,
+      "ratings": 3
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 80,
+    "fields": {
+      "article": 26,
+      "user": 1,
+      "ratings": 2
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 81,
+    "fields": {
+      "article": 5,
+      "user": 1,
+      "ratings": 1
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 82,
+    "fields": {
+      "article": 30,
+      "user": 1,
+      "ratings": 2
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 83,
+    "fields": {
+      "article": 18,
+      "user": 1,
+      "ratings": 3
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 84,
+    "fields": {
+      "article": 27,
+      "user": 1,
+      "ratings": 3
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 85,
+    "fields": {
+      "article": 2,
+      "user": 1,
+      "ratings": 4
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 86,
+    "fields": {
+      "article": 43,
+      "user": 1,
+      "ratings": 3
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 87,
+    "fields": {
+      "article": 44,
+      "user": 1,
+      "ratings": 2
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 88,
+    "fields": {
+      "article": 29,
+      "user": 1,
+      "ratings": 4
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 89,
+    "fields": {
+      "article": 35,
+      "user": 1,
+      "ratings": 1
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 90,
+    "fields": {
+      "article": 11,
+      "user": 1,
+      "ratings": 2
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 91,
+    "fields": {
+      "article": 13,
+      "user": 1,
+      "ratings": 1
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 92,
+    "fields": {
+      "article": 7,
+      "user": 1,
+      "ratings": 3
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 93,
+    "fields": {
+      "article": 36,
+      "user": 1,
+      "ratings": 4
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 94,
+    "fields": {
+      "article": 12,
+      "user": 1,
+      "ratings": 3
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 95,
+    "fields": {
+      "article": 15,
+      "user": 1,
+      "ratings": 4
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 96,
+    "fields": {
+      "article": 3,
+      "user": 1,
+      "ratings": 2
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 97,
+    "fields": {
+      "article": 46,
+      "user": 1,
+      "ratings": 2
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 98,
+    "fields": {
+      "article": 2,
+      "user": 1,
+      "ratings": 1
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 99,
+    "fields": {
+      "article": 45,
+      "user": 1,
+      "ratings": 1
+    }
+  },
+  {
+    "model": "news_app.Rating",
+    "pk": 100,
+    "fields": {
+      "article": 39,
+      "user": 1,
+      "ratings": 4
     }
   }
 ]
