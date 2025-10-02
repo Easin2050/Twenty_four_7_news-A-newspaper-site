@@ -2,7 +2,7 @@ from django.urls import path, include
 from rest_framework_nested import routers
 from users.views import UserProfileViewSet
 from users.views import UserViewSet
-from news_app.views import NewsArticleViewSet,CategoryViewSet,CategoryArticleViewSet,ArticleDetailsViewSet,ReviewViewSet,EditorsViewSet
+from news_app.views import NewsArticleViewSet,CategoryViewSet,CategoryArticleViewSet,ArticleDetailsViewSet,RatingViewSet,EditorsViewSet
 
 router = routers.DefaultRouter()
 
@@ -22,8 +22,11 @@ articles_router.register('articles',CategoryArticleViewSet,basename='category-ar
 article_details_router=routers.NestedDefaultRouter(router,'articles',lookup='article')
 article_details_router.register('details',ArticleDetailsViewSet,basename='article-details')
 
-news_retings_router=routers.NestedDefaultRouter(router,'articles',lookup='article')
-news_retings_router.register('ratings',ReviewViewSet,basename='article-ratings')
+articles_rating_router = routers.NestedSimpleRouter(router, 'articles', lookup='article')
+articles_rating_router.register('ratings', RatingViewSet, basename='article-ratings')
+
+users_router = routers.NestedSimpleRouter(router, 'users', lookup='user')
+users_router.register('ratings', RatingViewSet, basename='user-ratings')
 
 editors_router=routers.NestedDefaultRouter(router,'editors',lookup='editor')
 editors_router.register('articles',EditorsViewSet,basename='editor-articles')
@@ -34,7 +37,8 @@ urlpatterns = [
     path('', include(userprofile_router.urls)), 
     path('', include(articles_router.urls)),
     path('', include(article_details_router.urls)),
-    path('', include(news_retings_router.urls)),
+    path('',include(users_router.urls)),
+    path('',include(articles_rating_router.urls)),
     path('', include(editors_router.urls)),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),

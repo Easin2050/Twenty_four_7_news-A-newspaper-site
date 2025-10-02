@@ -13,7 +13,7 @@ class Category(models.Model):
 class NewsArticle(models.Model):
     title=models.CharField(max_length=200)
     body=models.TextField()
-    editor=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    editor=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,related_name='articles')
     category=models.ForeignKey(Category, on_delete=models.CASCADE, related_name='articles')
     published_date=models.DateTimeField(auto_now=True)
 

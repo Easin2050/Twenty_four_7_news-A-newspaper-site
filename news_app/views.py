@@ -1,15 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import viewsets
 from news_app.models import NewsArticle,Category,Rating
-from news_app.serializers import NewsArticleSerializer,CategorySerializer,ReviewSerializer,CategoryArticleSerializer,ArticleViewSerializer
+from news_app.serializers import NewsArticleSerializer,CategorySerializer,RatingSerializer,CategoryArticleSerializer,ArticleViewSerializer
 from users.pagination import CustomPagination
 from rest_framework.filters import SearchFilter,OrderingFilter
 from rest_framework.permissions import IsAdminUser,AllowAny
 from api.permissions import IsAdminOrReadOnly,IsReviewOwnerOrReadOnly,IsEditorOrReadOnly
 from django.core.mail import send_mail
 from django.conf import settings
+from rest_framework.exceptions import ValidationError
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset=Category.objects.prefetch_related('articles').all()
@@ -27,6 +28,7 @@ class CategoryArticleViewSet(viewsets.ModelViewSet):
     permission_classes = [AllowAny]
     search_fields = ['title', 'body']
     filter_backends = [SearchFilter, OrderingFilter]
+    ordering_fields = ['ratings']
 
     def get_queryset(self):
         category_id = self.kwargs.get('category_pk')
@@ -56,12 +58,12 @@ class NewsArticleViewSet(viewsets.ModelViewSet):
 
     def perform_update(self, serializer):
         if self.get_object().editor != self.request.user:
-            raise ValueError("You can only update your own articles.")
+            raise ValidationError({"status": "You can only update your own articles."})
         serializer.save()
     
     def perform_destroy(self, instance):
         if instance.editor != self.request.user:
-            raise ValueError("You can only delete your own articles.")
+            raise ValidationError({"status": "You can only delete your own articles."})
         instance.delete()
 
 
@@ -94,32 +96,34 @@ class ArticleDetailsViewSet(viewsets.ModelViewSet):
         return [IsAdminOrReadOnly()]
 
 
-class ReviewViewSet(viewsets.ModelViewSet):
-    serializer_class = ReviewSerializer
+
+class RatingViewSet(viewsets.ModelViewSet):
+    serializer_class = RatingSerializer
     permission_classes = [IsReviewOwnerOrReadOnly]
 
     def get_queryset(self):
         article_id = self.kwargs.get('article_pk')
-        return Rating.objects.filter(article_id=article_id)
+        user_id = self.kwargs.get('user_pk')
+
+        if article_id:
+            return Rating.objects.filter(article_id=article_id)
+        elif user_id:
+            return Rating.objects.filter(user_id=user_id)
+        return Rating.objects.none()
 
     def perform_create(self, serializer):
         article_id = self.kwargs.get('article_pk')
+        article = get_object_or_404(NewsArticle, pk=article_id)
 
-        if Rating.objects.filter(article_id=article_id, user=self.request.user).exists():
-            raise ValueError("You have already reviewed this article.")
+        if Rating.objects.filter(article=article, user=self.request.user).exists():
+            raise ValidationError({"status": "You have already rated this article."})
 
-        review = serializer.save(
-            user=self.request.user,
-            article_id=article_id
-        )
+        serializer.save(user=self.request.user, article=article)
 
-        article = review.article  
-        subject = f"New rating for your article: {article.title}"
-        message = f"Your article '{article.title}' received a rating of {review.value} from {self.request.user.email}."
-        from_email = settings.DEFAULT_FROM_EMAIL
-        recipient_list = [article.editor.email]  
+    def perform_update(self, serializer):
+        serializer.save(user=self.request.user)
 
-        send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+
 
 
 
