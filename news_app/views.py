@@ -123,7 +123,14 @@ class RatingViewSet(viewsets.ModelViewSet):
     def perform_update(self, serializer):
         serializer.save(user=self.request.user)
 
+class HomepageViewSet(viewsets.ModelViewSet):
+    serializer_class=NewsArticleSerializer
+    search_fields=['title','body']
+    queryset=NewsArticle.objects.all().order_by('-published_date')[:1]
 
-
+    def get_permissions(self):
+        if self.request.method=='GET':
+            return [AllowAny()]
+        return [IsAdminOrReadOnly()]
 
 
