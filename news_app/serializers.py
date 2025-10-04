@@ -7,21 +7,35 @@ class CategorySerializer(serializers.ModelSerializer):
         model=Category
         fields=['id','name','description']
 
+class NewsArticleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=NewsArticle
+        fields=['id','title','body','category','published_date']
+
 class CategoryArticleSerializer(serializers.ModelSerializer):
-    short_body = serializers.SerializerMethodField(method_name='short_body_method')
+    articles = NewsArticleSerializer(many=True, read_only=True)
 
     class Meta:
-        model = NewsArticle
-        fields = ['id', 'title', 'short_body']
-
-    def short_body_method(self, obj):
-        return obj.body[:150] 
+        model = Category
+        fields = ['id', 'name', 'articles']
 
 
 class NewsArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model=NewsArticle
         fields=['id','title','body','category','published_date']
+
+
+
+class HomepageArticleSerializer(serializers.ModelSerializer):
+    body = serializers.SerializerMethodField(method_name='short_body_method')
+
+    class Meta:
+        model = NewsArticle
+        fields = ['id', 'title', 'body']
+
+    def short_body_method(self, obj):
+        return obj.body[:50]+'...' if obj.body else ''
 
 
 class ArticleViewSerializer(serializers.ModelSerializer):

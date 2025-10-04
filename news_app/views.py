@@ -3,7 +3,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import viewsets
 from news_app.models import NewsArticle,Category,Rating
-from news_app.serializers import NewsArticleSerializer,CategorySerializer,RatingSerializer,CategoryArticleSerializer,ArticleViewSerializer
+from news_app.serializers import NewsArticleSerializer,CategorySerializer,RatingSerializer,CategoryArticleSerializer,ArticleViewSerializer,HomepageArticleSerializer
 from users.pagination import CustomPagination
 from rest_framework.filters import SearchFilter,OrderingFilter
 from rest_framework.permissions import IsAdminUser,AllowAny
@@ -11,11 +11,26 @@ from api.permissions import IsAdminOrReadOnly,IsReviewOwnerOrReadOnly,IsEditorOr
 from django.core.mail import send_mail
 from django.conf import settings
 from rest_framework.exceptions import ValidationError
+from django.db.models import Avg
+from django.db.models import Prefetch
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset=Category.objects.prefetch_related('articles').all()
     serializer_class=CategorySerializer
     search_fields=['name']
+
+    def create(self, request, *args, **kwargs):
+        name = request.data.get('name')
+        if Category.objects.filter(name__iexact=name).exists():
+            raise ValidationError({"status": "Category with this name already exists."})
+        return super().create(request, *args, **kwargs)
+    
+    def update(self, request, *args, **kwargs):
+        name = request.data.get('name')
+        category_id = self.get_object().id
+        if Category.objects.filter(name__iexact=name).exclude(id=category_id).exists():
+            raise ValidationError({"status": "Category with this name already exists."})
+        return super().update(request, *args, **kwargs)
 
     def get_permissions(self):
         if self.request.method=='GET':
@@ -24,20 +39,17 @@ class CategoryViewSet(viewsets.ModelViewSet):
     
     
 class CategoryArticleViewSet(viewsets.ModelViewSet):
-    serializer_class = CategoryArticleSerializer
-    permission_classes = [AllowAny]
+    serializer_class = NewsArticleSerializer  
     search_fields = ['title', 'body']
-    filter_backends = [SearchFilter, OrderingFilter]
-    ordering_fields = ['ratings']
+    filter_backends = [SearchFilter]
 
     def get_queryset(self):
         category_id = self.kwargs.get('category_pk')
-        return NewsArticle.objects.filter(category_id=category_id)
+        return NewsArticle.objects.filter(category_id=category_id).annotate(
+            avg_rating=Avg('ratings__ratings')
+        ).order_by('-avg_rating')
 
-    def get_permissions(self):
-        if self.request.method=='GET':
-            return [AllowAny()]
-        return [IsAdminOrReadOnly()]
+
 
 class NewsArticleViewSet(viewsets.ModelViewSet):
     queryset=NewsArticle.objects.all()
@@ -124,7 +136,7 @@ class RatingViewSet(viewsets.ModelViewSet):
         serializer.save(user=self.request.user)
 
 class HomepageViewSet(viewsets.ModelViewSet):
-    serializer_class=NewsArticleSerializer
+    serializer_class= HomepageArticleSerializer
     search_fields=['title','body']
     queryset=NewsArticle.objects.all().order_by('-published_date')[:1]
 
