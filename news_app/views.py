@@ -46,8 +46,8 @@ class CategoryArticleViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         category_id = self.kwargs.get('category_pk')
         return NewsArticle.objects.filter(category_id=category_id).annotate(
-            avg_rating=Avg('ratings__ratings')
-        ).order_by('-avg_rating')
+            rating=Avg('ratings__ratings')
+        ).order_by('-rating')
 
 
 
@@ -126,9 +126,41 @@ class RatingViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         article_id = self.kwargs.get('article_pk')
         article = get_object_or_404(NewsArticle, pk=article_id)
+        author =article.editor
+        user=self.request.user
+        rating = self.request.data.get('ratings')
 
         if Rating.objects.filter(article=article, user=self.request.user).exists():
             raise ValidationError({"status": "You have already rated this article."})
+        
+        if author and author.email:
+            send_mail(
+                subject=f"New rating on your article '{article.title}'",
+                message=(
+                    f"Hello {author.username},\n\n"
+                    f"Your article '{article.title}' has received a new rating.\n"
+                    f"User: {user.username}\n"
+                    f"Rating: {rating.ratings} stars\n\n"
+                    "Best regards,\nYour News Portal"
+                ),
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[author.email],
+                fail_silently=True,
+            )
+
+        if user and user.email:
+            send_mail(
+                subject=f"Thank you for rating '{article.title}'",
+                message=(
+                    f"Hello {user.username},\n\n"
+                    f"Thank you for rating the article '{article.title}'.\n"
+                    f"Your rating: {rating.ratings} stars\n\n"
+                    "We appreciate your feedback!\nYour News Portal"
+                ),
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[user.email],
+                fail_silently=True,
+            )
 
         serializer.save(user=self.request.user, article=article)
 
