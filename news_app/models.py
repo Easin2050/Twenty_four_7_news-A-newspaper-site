@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.conf import settings
+from .validators import validate_file_size
 
 
 class Category(models.Model):
@@ -19,6 +20,12 @@ class NewsArticle(models.Model):
 
     def __str__(self):
         return f'{self.title}-{self.category}'
+    
+class NewsArticleImage(models.Model):
+    news_article = models.ForeignKey(
+        NewsArticle, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(
+        upload_to="products/images/", validators=[validate_file_size])
 
 class Rating(models.Model):
     article = models.ForeignKey(NewsArticle, on_delete=models.CASCADE, related_name="ratings")
