@@ -27,6 +27,9 @@ class NewsArticleImage(models.Model):
     image = models.ImageField(
         upload_to="products/images/", validators=[validate_file_size])
 
+    def __str__(self):
+        return f'Image for {self.news_article.title}'
+
 class Rating(models.Model):
     article = models.ForeignKey(NewsArticle, on_delete=models.CASCADE, related_name="ratings")
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
