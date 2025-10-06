@@ -6,4 +6,4 @@ news_env/
 .news_env/
 db.sqlite3
 /media/
-.env/
+.env
