@@ -13,18 +13,29 @@ from django.conf import settings
 from rest_framework.exceptions import ValidationError
 from django.db.models import Avg
 from django.db.models import Prefetch
+from drf_yasg.utils import swagger_auto_schema
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset=Category.objects.prefetch_related('articles').all()
     serializer_class=CategorySerializer
     search_fields=['name']
 
+    @swagger_auto_schema(
+           operation_summary="Create a new category. Admins only.",
+           operation_description="Create a new category with a unique name. Only admins can perform this action.",
+           responses={201: CategorySerializer, 400: 'Bad Request'},
+    )
     def create(self, request, *args, **kwargs):
         name = request.data.get('name')
         if Category.objects.filter(name__iexact=name).exists():
             raise ValidationError({"status": "Category with this name already exists."})
         return super().create(request, *args, **kwargs)
     
+    @swagger_auto_schema(
+            operation_summary="Update an existing category. Admins only.",
+            operation_description="Update the name of an existing category. Only admins can perform this action.",
+            responses={200: CategorySerializer, 400: 'Bad Request', 404: 'Not Found'}
+    )
     def update(self, request, *args, **kwargs):
         name = request.data.get('name')
         category_id = self.get_object().id
@@ -43,6 +54,18 @@ class CategoryArticleViewSet(viewsets.ModelViewSet):
     search_fields = ['title', 'body']
     filter_backends = [SearchFilter]
 
+    @swagger_auto_schema(
+        operation_summary="List articles in a category (sorted by average rating)",
+        operation_description=(
+            "Retrieve a list of articles belonging to a specific category, "
+            "ordered by their average rating (highest first). "
+            "Each article includes its title and a short body preview (first 150 characters)."
+        ),
+        responses={200: NewsArticleSerializer(many=True)}
+    )
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+    
     def get_queryset(self):
         category_id = self.kwargs.get('category_pk')
         return NewsArticle.objects.filter(category_id=category_id).annotate(
@@ -58,6 +81,14 @@ class NewsArticleViewSet(viewsets.ModelViewSet):
     search_fields=['title','body']
     filter_backends=[SearchFilter,OrderingFilter]
 
+    @swagger_auto_schema(
+        operation_summary="List all news articles",
+        operation_description="Retrieve all articles with optional search and ordering filters.",
+        responses={200: NewsArticleSerializer(many=True)}
+    )
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+
 
     def get_permissions(self):
         if self.request.method=='GET':
@@ -72,6 +103,7 @@ class NewsArticleViewSet(viewsets.ModelViewSet):
         if self.get_object().editor != self.request.user:
             raise ValidationError({"status": "You can only update your own articles."})
         serializer.save()
+    
     
     def perform_destroy(self, instance):
         if instance.editor != self.request.user:
@@ -97,6 +129,7 @@ class EditorsViewSet(viewsets.ModelViewSet):
 class ArticleDetailsViewSet(viewsets.ModelViewSet):
     serializer_class = ArticleViewSerializer
     search_fields = ['title']
+
 
     def get_queryset(self):
         article_id = self.kwargs.get('article_pk')
