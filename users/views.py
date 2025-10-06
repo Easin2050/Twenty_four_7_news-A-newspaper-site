@@ -10,11 +10,19 @@ from users.pagination import CustomPagination
 from rest_framework.filters import SearchFilter,OrderingFilter
 from rest_framework.mixins import CreateModelMixin,RetrieveModelMixin,UpdateModelMixin
 from api.permissions import IsProfileOwner
+from drf_yasg.utils import swagger_auto_schema
+ 
 
 class UserViewSet(ModelViewSet):
     serializer_class = UserSerializer
     pagination_class = CustomPagination
     http_method_names = ["get", "put", "patch"]  
+
+    @swagger_auto_schema(
+            operation_summary="User can create account using email"
+    )
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
 
     def get_queryset(self):
         if self.request.user.is_superuser:
