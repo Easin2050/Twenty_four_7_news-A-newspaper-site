@@ -7,24 +7,21 @@ class CategorySerializer(serializers.ModelSerializer):
         model=Category
         fields=['id','name','description']
 
-class NewsArticleSerializer(serializers.ModelSerializer):
-    class Meta:
-        model=NewsArticle
-        fields=['id','title','body','category','published_date']
-
-class CategoryArticleSerializer(serializers.ModelSerializer):
-    articles = NewsArticleSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = Category
-        fields = ['id', 'name', 'articles']
-
 
 class NewsArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model=NewsArticle
         fields=['id','title','body','category','published_date']
 
+class NewsArticleSerializer2(serializers.ModelSerializer):
+    short_body = serializers.SerializerMethodField()
+
+    class Meta:
+        model = NewsArticle
+        fields = ['id', 'title', 'short_body']
+
+    def get_short_body(self, obj):
+        return obj.body[:150] + '...' if obj.body else ''
 
 
 class HomepageArticleSerializer(serializers.ModelSerializer):

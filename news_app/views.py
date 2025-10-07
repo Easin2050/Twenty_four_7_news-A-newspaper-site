@@ -3,7 +3,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import viewsets
 from news_app.models import NewsArticle,Category,Rating
-from news_app.serializers import NewsArticleSerializer,CategorySerializer,RatingSerializer,CategoryArticleSerializer,ArticleViewSerializer,HomepageArticleSerializer
+from news_app.serializers import NewsArticleSerializer,CategorySerializer,RatingSerializer,NewsArticleSerializer2,ArticleViewSerializer,HomepageArticleSerializer
 from users.pagination import CustomPagination
 from rest_framework.filters import SearchFilter,OrderingFilter
 from rest_framework.permissions import IsAdminUser,AllowAny
@@ -48,9 +48,15 @@ class CategoryViewSet(viewsets.ModelViewSet):
             return [AllowAny()]
         return [IsAdminOrReadOnly()]
     
+    def destroy(self, request, *args, **kwargs):
+        category = self.get_object()
+        if category.articles.exists(): 
+            raise ValidationError({"status": "Category with news cannot be deleted."})
+        return super().destroy(request, *args, **kwargs)
+
     
 class CategoryArticleViewSet(viewsets.ModelViewSet):
-    serializer_class = NewsArticleSerializer  
+    serializer_class = NewsArticleSerializer2  
     search_fields = ['title', 'body']
     filter_backends = [SearchFilter]
 
@@ -61,7 +67,7 @@ class CategoryArticleViewSet(viewsets.ModelViewSet):
             "ordered by their average rating (highest first). "
             "Each article includes its title and a short body preview (first 150 characters)."
         ),
-        responses={200: NewsArticleSerializer(many=True)}
+        responses={200: NewsArticleSerializer2(many=True)}
     )
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
@@ -71,7 +77,29 @@ class CategoryArticleViewSet(viewsets.ModelViewSet):
         return NewsArticle.objects.filter(category_id=category_id).annotate(
             rating=Avg('ratings__ratings')
         ).order_by('-rating')
+    
+    def perform_create(self, serializer):
+        category_id = self.kwargs.get('category_pk')
+        category = get_object_or_404(Category, pk=category_id)
+        editor = self.request.user
+        serializer.save(editor=editor, category=category)
 
+    def perform_update(self, serializer):
+        article = self.get_object()
+        if not self.request.user.is_superuser and article.editor != self.request.user:
+            raise ValidationError({"status": "You can only update your own articles."})
+        serializer.save()
+
+    def perform_destroy(self, instance):
+        if not self.request.user.is_superuser and instance.editor != self.request.user:
+            raise ValidationError({"status": "You can only delete your own articles."})
+        instance.delete()
+
+    def get_permissions(self):
+        if self.request.method=='GET':
+            return [AllowAny()]
+        return [IsEditorOrReadOnly()]
+    
 
 
 class NewsArticleViewSet(viewsets.ModelViewSet):
