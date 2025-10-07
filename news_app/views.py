@@ -11,7 +11,7 @@ from api.permissions import IsAdminOrReadOnly,IsReviewOwnerOrReadOnly,IsEditorOr
 from django.core.mail import send_mail
 from django.conf import settings
 from rest_framework.exceptions import ValidationError
-from django.db.models import Avg
+from django.db.models import Avg,Count
 from django.db.models import Prefetch
 from drf_yasg.utils import swagger_auto_schema
 
@@ -19,7 +19,6 @@ class CategoryViewSet(viewsets.ModelViewSet):
     queryset=Category.objects.prefetch_related('articles').all()
     serializer_class=CategorySerializer
     search_fields=['name']
-
     @swagger_auto_schema(
            operation_summary="Create a new category. Admins only.",
            operation_description="Create a new category with a unique name. Only admins can perform this action.",
@@ -59,6 +58,7 @@ class CategoryArticleViewSet(viewsets.ModelViewSet):
     serializer_class = NewsArticleSerializer2  
     search_fields = ['title', 'body']
     filter_backends = [SearchFilter]
+    order_fields=['id']
 
     @swagger_auto_schema(
         operation_summary="List articles in a category (sorted by average rating)",
@@ -103,7 +103,7 @@ class CategoryArticleViewSet(viewsets.ModelViewSet):
 
 
 class NewsArticleViewSet(viewsets.ModelViewSet):
-    queryset=NewsArticle.objects.all()
+    # queryset=NewsArticle.objects.all()
     serializer_class=NewsArticleSerializer
     pagination_class=CustomPagination
     search_fields=['title','body']
@@ -117,6 +117,9 @@ class NewsArticleViewSet(viewsets.ModelViewSet):
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
 
+    queryset = NewsArticle.objects.annotate(
+        average_rating=Avg('ratings__ratings'),
+    ).order_by('-published_date')
 
     def get_permissions(self):
         if self.request.method=='GET':
@@ -137,6 +140,7 @@ class NewsArticleViewSet(viewsets.ModelViewSet):
         if instance.editor != self.request.user:
             raise ValidationError({"status": "You can only delete your own articles."})
         instance.delete()
+        
 
 
 class EditorsViewSet(viewsets.ModelViewSet):

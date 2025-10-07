@@ -19,7 +19,12 @@ class UserSerializer(BaseUserSerializer):
 
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
-        model=UserProfile
-        fields=['id','bio','profile_pic']
+        model = UserProfile
+        fields = ['id', 'bio', 'profile_pic', 'user']
+        read_only_fields = ['user']
 
-    
+    def update(self, instance, validated_data):
+        profile_pic = validated_data.get('profile_pic', None)
+        if not profile_pic:
+            validated_data['profile_pic'] = instance.profile_pic
+        return super().update(instance, validated_data)

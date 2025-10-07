@@ -10,8 +10,10 @@ from users.pagination import CustomPagination
 from rest_framework.filters import SearchFilter,OrderingFilter
 from rest_framework.mixins import CreateModelMixin,RetrieveModelMixin,UpdateModelMixin
 from api.permissions import IsProfileOwner
-from drf_yasg.utils import swagger_auto_schema
-from .signals import create_or_update_user_profile
+from rest_framework.response import Response
+from django.shortcuts import get_object_or_404
+from rest_framework.decorators import action
+from rest_framework.parsers import MultiPartParser, FormParser
 
 class UserViewSet(ModelViewSet):
     serializer_class = UserSerializer
@@ -34,11 +36,44 @@ class UserProfileViewSet(GenericViewSet, RetrieveModelMixin, CreateModelMixin, U
     permission_classes = [IsAuthenticated, IsProfileOwner]
 
     def get_queryset(self):
-        if getattr(self,'swagger_fake_view',False):
+        if getattr(self, 'swagger_fake_view', False):
             return UserProfile.objects.none()
-        return UserProfile.objects.filter(user=self.request.user)
+
+        user = self.request.user
+        if user.is_superuser:
+            return UserProfile.objects.all()
+        return UserProfile.objects.filter(user=user)
 
     def perform_create(self, serializer):
         if UserProfile.objects.filter(user=self.request.user).exists():
-            raise ValidationError({"detail": "Profile already exists."})
+            raise ValidationError({"status": "You already have a profile."})
         serializer.save(user=self.request.user)
+
+    def perform_update(self, serializer):
+        profile = self.get_object()
+        if profile.user != self.request.user:
+            raise ValidationError({"status": "You can only update your own profile."})
+
+        if 'profile_pic' not in self.request.data or not self.request.data.get('profile_pic'):
+            serializer.validated_data['profile_pic'] = profile.profile_pic
+
+        serializer.save()
+
+    def perform_destroy(self, instance):
+        if instance.user != self.request.user:
+            raise ValidationError({"status": "You can only delete your own profile."})
+        instance.delete()
+
+    @action(detail=False, methods=['get', 'patch'], url_path='me')
+    def me(self, request):
+        profile = get_object_or_404(UserProfile, user=request.user)
+
+        if request.method == 'GET':
+            serializer = self.get_serializer(profile)
+            return Response(serializer.data)
+
+        elif request.method == 'PATCH':
+            serializer = self.get_serializer(profile, data=request.data, partial=True)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
