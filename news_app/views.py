@@ -1,19 +1,18 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import get_object_or_404
 from rest_framework.decorators import action
-from rest_framework.response import Response
 from rest_framework import viewsets
 from news_app.models import NewsArticle,Category,Rating
 from news_app.serializers import NewsArticleSerializer,CategorySerializer,RatingSerializer,NewsArticleSerializer2,ArticleViewSerializer,HomepageArticleSerializer
 from users.pagination import CustomPagination
 from rest_framework.filters import SearchFilter,OrderingFilter
-from rest_framework.permissions import IsAdminUser,AllowAny
+from rest_framework.permissions import IsAdminUser,AllowAny,IsAuthenticated
 from api.permissions import IsAdminOrReadOnly,IsReviewOwnerOrReadOnly,IsEditorOrReadOnly
 from django.core.mail import send_mail
 from django.conf import settings
 from rest_framework.exceptions import ValidationError
-from django.db.models import Avg,Count
-from django.db.models import Prefetch
+from django.db.models import Avg
 from drf_yasg.utils import swagger_auto_schema
+
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset=Category.objects.prefetch_related('articles').all()
@@ -100,10 +99,7 @@ class CategoryArticleViewSet(viewsets.ModelViewSet):
             return [AllowAny()]
         return [IsEditorOrReadOnly()]
     
-
-
 class NewsArticleViewSet(viewsets.ModelViewSet):
-    # queryset=NewsArticle.objects.all()
     serializer_class=NewsArticleSerializer
     pagination_class=CustomPagination
     search_fields=['title','body']
@@ -121,6 +117,11 @@ class NewsArticleViewSet(viewsets.ModelViewSet):
         average_rating=Avg('ratings__ratings'),
     ).order_by('-published_date')
 
+    def get_serializer_class(self):
+        if self.action == 'retrieve':  
+            return ArticleViewSerializer  
+        return NewsArticleSerializer 
+
     def get_permissions(self):
         if self.request.method=='GET':
             return [AllowAny()]
@@ -131,74 +132,54 @@ class NewsArticleViewSet(viewsets.ModelViewSet):
         serializer.save(editor=editor)
 
     def perform_update(self, serializer):
-        if self.get_object().editor != self.request.user:
+        obj = self.get_object()
+        if obj.editor != self.request.user and not self.request.user.is_superuser:
             raise ValidationError({"status": "You can only update your own articles."})
         serializer.save()
-    
-    
+
     def perform_destroy(self, instance):
-        if instance.editor != self.request.user:
+        if instance.editor != self.request.user and not self.request.user.is_superuser:
             raise ValidationError({"status": "You can only delete your own articles."})
         instance.delete()
         
-
-
 class EditorsViewSet(viewsets.ModelViewSet):
     serializer_class = NewsArticleSerializer
     permission_classes = [IsEditorOrReadOnly]
     search_fields = ['title', 'body']
     filter_backends = [SearchFilter, OrderingFilter]
+    ordering_fields = ['published_date', 'title']
+    pagination_class = CustomPagination
 
     def get_queryset(self):
-        editor_id=self.request.user.id
-        return NewsArticle.objects.filter(editor_id=editor_id)
+        user = self.request.user
+        if user.is_superuser: 
+            return NewsArticle.objects.filter(editor=user).all()
+        return NewsArticle.objects.filter(editor=user)
 
-    def perform_create(self,serializer):
-        editor=self.request.user
-        serializer.save(editor=editor)
-
-
-class ArticleDetailsViewSet(viewsets.ModelViewSet):
-    serializer_class = ArticleViewSerializer
-    search_fields = ['title']
-
-
-    def get_queryset(self):
-        article_id = self.kwargs.get('article_pk')
-        return NewsArticle.objects.filter(id=article_id)
-
-    def get_permissions(self):
-        if self.request.method=='GET':
-            return [AllowAny()]
-        return [IsAdminOrReadOnly()]
-
+    def perform_create(self, serializer):
+        serializer.save(editor=self.request.user)
 
 
 class RatingViewSet(viewsets.ModelViewSet):
     serializer_class = RatingSerializer
-    permission_classes = [IsReviewOwnerOrReadOnly]
+    permission_classes = [IsAuthenticated, IsReviewOwnerOrReadOnly]
 
     def get_queryset(self):
         article_id = self.kwargs.get('article_pk')
-        user_id = self.kwargs.get('user_pk')
-
         if article_id:
             return Rating.objects.filter(article_id=article_id)
-        elif user_id:
-            return Rating.objects.filter(user_id=user_id)
-        return Rating.objects.none()
+        return Rating.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
         article_id = self.kwargs.get('article_pk')
         article = get_object_or_404(NewsArticle, pk=article_id)
         author = article.editor
-
         user = self.request.user
-        rating = self.request.data.get('ratings') 
+        rating_value = self.request.data.get('ratings')
 
         existing_rating = Rating.objects.filter(article=article, user=user).first()
         if existing_rating:
-            existing_rating.ratings = rating
+            existing_rating.ratings = rating_value
             existing_rating.save()
             serializer.instance = existing_rating
         else:
@@ -211,7 +192,7 @@ class RatingViewSet(viewsets.ModelViewSet):
                     f"Hello {author.get_full_name()},\n\n"
                     f"Your article '{article.title}' has received a new rating.\n"
                     f"User: {user.get_full_name()}\n"
-                    f"Rating: {rating} stars\n\n"
+                    f"Rating: {rating_value} stars\n\n"
                     "Best regards,\nTwenty Four 7 News"
                 ),
                 from_email=settings.DEFAULT_FROM_EMAIL,
@@ -225,7 +206,7 @@ class RatingViewSet(viewsets.ModelViewSet):
                 message=(
                     f"Hello {user.get_full_name()},\n\n"
                     f"Thank you for rating the article '{article.title}'.\n"
-                    f"Your rating: {rating} stars\n\n"
+                    f"Your rating: {rating_value} stars\n\n"
                     "We appreciate your feedback!\nTwenty Four 7 News"
                 ),
                 from_email=settings.DEFAULT_FROM_EMAIL,
@@ -233,10 +214,11 @@ class RatingViewSet(viewsets.ModelViewSet):
                 fail_silently=True,
             )
 
-        serializer.save(user=user, article=article)
-
-    def perform_update(self,serializer):
-        return serializer.save()
+    @action(detail=False, methods=['get'], url_path='me')
+    def my_ratings(self, request):
+        ratings = Rating.objects.filter(user=request.user)
+        serializer = self.get_serializer(ratings, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 class HomepageViewSet(viewsets.ModelViewSet):
     serializer_class= HomepageArticleSerializer
@@ -247,6 +229,9 @@ class HomepageViewSet(viewsets.ModelViewSet):
         if self.request.method=='GET':
             return [AllowAny()]
         return [IsAdminOrReadOnly()]
+
+    def update(self, request, *args, **kwargs):
+        return super().update(request, *args, **kwargs)
 
 
 

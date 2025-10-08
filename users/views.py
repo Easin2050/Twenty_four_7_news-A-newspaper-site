@@ -8,12 +8,10 @@ from django.contrib.auth import get_user_model
 from rest_framework.permissions import BasePermission, IsAuthenticated,IsAdminUser,AllowAny
 from users.pagination import CustomPagination
 from rest_framework.filters import SearchFilter,OrderingFilter
-from rest_framework.mixins import CreateModelMixin,RetrieveModelMixin,UpdateModelMixin
-from api.permissions import IsProfileOwner
-from rest_framework.response import Response
+from rest_framework.mixins import CreateModelMixin,RetrieveModelMixin,UpdateModelMixin,ListModelMixin
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import action
-from rest_framework.parsers import MultiPartParser, FormParser
+from api.permissions import IsProfileOwnerOrAdmin
 
 class UserViewSet(ModelViewSet):
     serializer_class = UserSerializer
@@ -31,9 +29,10 @@ class UserViewSet(ModelViewSet):
         return [IsAdminUser()]
     
 
-class UserProfileViewSet(GenericViewSet, RetrieveModelMixin, CreateModelMixin, UpdateModelMixin):
+
+class UserProfileViewSet(GenericViewSet, RetrieveModelMixin, CreateModelMixin, UpdateModelMixin,ListModelMixin):
     serializer_class = UserProfileSerializer
-    permission_classes = [IsAuthenticated, IsProfileOwner]
+    permission_classes = [IsAuthenticated, IsProfileOwnerOrAdmin]
 
     def get_queryset(self):
         if getattr(self, 'swagger_fake_view', False):
@@ -45,13 +44,14 @@ class UserProfileViewSet(GenericViewSet, RetrieveModelMixin, CreateModelMixin, U
         return UserProfile.objects.filter(user=user)
 
     def perform_create(self, serializer):
-        if UserProfile.objects.filter(user=self.request.user).exists():
+        if not self.request.user.is_superuser and UserProfile.objects.filter(user=self.request.user).exists():
             raise ValidationError({"status": "You already have a profile."})
         serializer.save(user=self.request.user)
 
     def perform_update(self, serializer):
         profile = self.get_object()
-        if profile.user != self.request.user:
+
+        if not self.request.user.is_superuser and profile.user != self.request.user:
             raise ValidationError({"status": "You can only update your own profile."})
 
         if 'profile_pic' not in self.request.data or not self.request.data.get('profile_pic'):
@@ -60,12 +60,13 @@ class UserProfileViewSet(GenericViewSet, RetrieveModelMixin, CreateModelMixin, U
         serializer.save()
 
     def perform_destroy(self, instance):
-        if instance.user != self.request.user:
+        if not self.request.user.is_superuser and instance.user != self.request.user:
             raise ValidationError({"status": "You can only delete your own profile."})
         instance.delete()
 
     @action(detail=False, methods=['get', 'patch'], url_path='me')
     def me(self, request):
+        """Endpoint for user to get or update their own profile"""
         profile = get_object_or_404(UserProfile, user=request.user)
 
         if request.method == 'GET':

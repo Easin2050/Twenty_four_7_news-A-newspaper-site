@@ -8,8 +8,12 @@ class FullDjangoModelPermissions(permissions.DjangoModelPermissions):
         self.perms_map['GET']= ['%(app_label)s.delete_%(model_name)s']
         self.perms_map['GET']= ['%(app_label)s.view_%(model_name)s']
 
-class IsProfileOwner(permissions.BasePermission):
+
+class IsProfileOwnerOrAdmin(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
+        if request.user.is_superuser:
+            return True
+        
         return obj.user == request.user
 
 
