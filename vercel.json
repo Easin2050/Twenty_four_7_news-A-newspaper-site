@@ -1,0 +1,13 @@
+{
+    "builds": [{
+      "src": "Twenty_Four_7_news/wsgi.py",
+      "use": "@vercel/python",
+      "config": { "maxLambdaSize": "15mb", "runtime": "python3.11.3" }
+    }],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "Twenty_Four_7_news/wsgi.py"
+      }
+    ]
+}

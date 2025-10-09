@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-id-66j%bw@%h%zh)5+wu$w@0m2ynm2rc2+=$9g7k)-a07ycv+=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['.vercel.app,127.0.0.1']
+ALLOWED_HOSTS = [".vercel.app", '127.0.0.1']
 
 AUTH_USER_MODEL='users.User'
 # Application definition
@@ -80,7 +80,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'Twenty_Four_7_news.wsgi.application'
+WSGI_APPLICATION = 'Twenty_Four_7_news.wsgi.app'
 
 
 # Database
