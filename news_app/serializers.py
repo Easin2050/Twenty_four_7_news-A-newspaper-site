@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import NewsArticle, Category,Rating
+from .models import NewsArticle, Category,Rating,NewsArticleImage
 from django.db.models import Avg
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -8,12 +8,18 @@ class CategorySerializer(serializers.ModelSerializer):
         fields=['id','name','description']
 
 
+class NewsArticleImagesSerializer(serializers.ModelSerializer):
+    image=serializers.ImageField()
+    class Meta:
+        model=NewsArticleImage
+        fields=['id','image']
+
 class NewsArticleSerializer(serializers.ModelSerializer):
     average_ratings=serializers.SerializerMethodField(method_name='get_average_ratings')
-
+    images=NewsArticleImagesSerializer(many=True,read_only=True)
     class Meta:
         model=NewsArticle
-        fields = ['id', 'title', 'body', 'category', 'published_date', 'average_ratings']
+        fields = ['id', 'title', 'body', 'category', 'published_date','images', 'average_ratings']
         read_only_fields=['average_ratings']
 
     def get_average_ratings(self, obj):

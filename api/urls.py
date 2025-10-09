@@ -2,7 +2,7 @@ from django.urls import path, include
 from rest_framework_nested import routers
 from users.views import UserProfileViewSet
 from users.views import UserViewSet
-from news_app.views import NewsArticleViewSet,CategoryViewSet,CategoryArticleViewSet,RatingViewSet,EditorsViewSet,HomepageViewSet
+from news_app.views import NewsArticleViewSet,CategoryViewSet,CategoryArticleViewSet,RatingViewSet,EditorsViewSet,HomepageViewSet,NewsArticleImageViewSet
 
 router = routers.DefaultRouter()
 
@@ -22,6 +22,7 @@ articles_router.register('articles',CategoryArticleViewSet,basename='category-ar
 
 article_details_router=routers.NestedDefaultRouter(router,'articles',lookup='article')
 article_details_router.register('details',NewsArticleViewSet,basename='article-details')
+article_details_router.register('images',NewsArticleImageViewSet,basename='images')
 
 articles_rating_router = routers.NestedSimpleRouter(router, 'articles', lookup='article')
 articles_rating_router.register('ratings', RatingViewSet, basename='article-ratings')

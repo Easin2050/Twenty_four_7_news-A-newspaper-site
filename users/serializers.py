@@ -18,6 +18,7 @@ class UserSerializer(BaseUserSerializer):
         
 
 class UserProfileSerializer(serializers.ModelSerializer):
+    profile_pic=serializers.ImageField()
     class Meta:
         model = UserProfile
         fields = ['id', 'bio', 'profile_pic', 'user']

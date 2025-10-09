@@ -1,8 +1,8 @@
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import action
 from rest_framework import viewsets
-from news_app.models import NewsArticle,Category,Rating
-from news_app.serializers import NewsArticleSerializer,CategorySerializer,RatingSerializer,NewsArticleSerializer2,ArticleViewSerializer,HomepageArticleSerializer
+from news_app.models import NewsArticle,Category,NewsArticleImage,Rating
+from news_app.serializers import NewsArticleSerializer,CategorySerializer,RatingSerializer,NewsArticleSerializer2,ArticleViewSerializer,HomepageArticleSerializer,NewsArticleImagesSerializer
 from users.pagination import CustomPagination
 from rest_framework.filters import SearchFilter,OrderingFilter
 from rest_framework.permissions import IsAdminUser,AllowAny,IsAuthenticated
@@ -141,6 +141,40 @@ class NewsArticleViewSet(viewsets.ModelViewSet):
         if instance.editor != self.request.user and not self.request.user.is_superuser:
             raise ValidationError({"status": "You can only delete your own articles."})
         instance.delete()
+
+class NewsArticleImageViewSet(viewsets.ModelViewSet):
+    serializer_class = NewsArticleImagesSerializer
+    permission_classes = [IsEditorOrReadOnly]
+
+    def get_queryset(self):
+        return NewsArticleImage.objects.filter(news_article_id=self.kwargs.get('article_pk'))
+
+    def perform_create(self, serializer):
+        article_id = self.kwargs.get('article_pk')
+        article = get_object_or_404(NewsArticle, pk=article_id)
+
+        if self.request.user != article.editor and not self.request.user.is_superuser:
+            raise ValidationError({"status": "You do not have permission to add images to this article."})
+
+        serializer.save(news_article=article)
+
+    def perform_update(self, serializer):
+        image = self.get_object()
+        article = image.news_article
+
+        if self.request.user != article.editor and not self.request.user.is_superuser:
+            raise ValidationError({"status": "You do not have permission to edit images of this article."})
+
+        serializer.save()
+
+    def perform_destroy(self, instance):
+        article = instance.news_article
+
+        if self.request.user != article.editor and not self.request.user.is_superuser:
+            raise ValidationError({"status": "You do not have permission to delete images of this article."})
+
+        instance.delete()
+
         
 class EditorsViewSet(viewsets.ModelViewSet):
     serializer_class = NewsArticleSerializer
@@ -152,8 +186,8 @@ class EditorsViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        if user.is_superuser: 
-            return NewsArticle.objects.filter(editor=user).all()
+        if user.is_superuser:
+            return NewsArticle.objects.all()
         return NewsArticle.objects.filter(editor=user)
 
     def perform_create(self, serializer):

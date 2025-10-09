@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from users.managers import CustomUserManager
 from uuid import uuid4
+from cloudinary.models import CloudinaryField
 
 class User(AbstractUser):
     ROLE_CHOICES = (
@@ -24,7 +25,7 @@ class UserProfile(models.Model):
     id=models.UUIDField(primary_key=True, default=uuid4, editable=False)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(blank=True, null=True)
-    profile_pic = models.ImageField(upload_to='users/image/', blank=True, null=True)
+    profile_pic = CloudinaryField('image', default='default_profile_pic')
 
     def __str__(self):    
         return f"Profile of {self.user.email}"
