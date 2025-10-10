@@ -16,7 +16,7 @@ from api.permissions import IsProfileOwnerOrAdmin
 class UserViewSet(ModelViewSet):
     serializer_class = UserSerializer
     pagination_class = CustomPagination
-    http_method_names = ["get", "put", "patch"]
+    http_method_names = ["get", "patch",'delete']
 
     def get_queryset(self):
         if self.request.user.is_superuser:
@@ -24,10 +24,17 @@ class UserViewSet(ModelViewSet):
         return get_user_model().objects.filter(id=self.request.user.id)
 
     def get_permissions(self):
-        if self.request.method in ["GET", "PUT", "PATCH"]:
+        if self.action in ['update', 'partial_update', 'destroy']:
             return [IsAuthenticated()]
-        return [IsAdminUser()]
-    
+        return [IsAuthenticated()]
+
+    def destroy(self, request, *args, **kwargs):
+        user = self.get_object()
+        if not request.user.is_superuser and user.id != request.user.id:
+            raise ValidationError({"status": "You can only delete your own account."})
+        user.delete()
+        return Response({"status": "User deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+
 
 
 class UserProfileViewSet(GenericViewSet, RetrieveModelMixin, CreateModelMixin, UpdateModelMixin,ListModelMixin):

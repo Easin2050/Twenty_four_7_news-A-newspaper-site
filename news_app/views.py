@@ -18,6 +18,9 @@ class CategoryViewSet(viewsets.ModelViewSet):
     queryset=Category.objects.prefetch_related('articles').all()
     serializer_class=CategorySerializer
     search_fields=['name']
+    pagination_class=CustomPagination
+    filter_backends=[SearchFilter,OrderingFilter]
+    order_fields=['id','name']
     @swagger_auto_schema(
            operation_summary="Create a new category. Admins only.",
            operation_description="Create a new category with a unique name. Only admins can perform this action.",
@@ -56,8 +59,10 @@ class CategoryViewSet(viewsets.ModelViewSet):
 class CategoryArticleViewSet(viewsets.ModelViewSet):
     serializer_class = NewsArticleSerializer2  
     search_fields = ['title', 'body']
-    filter_backends = [SearchFilter]
-    order_fields=['id']
+    order_fields=['id','title']
+    pagination_class = CustomPagination
+    filter_backends = [SearchFilter,OrderingFilter]
+
 
     @swagger_auto_schema(
         operation_summary="List articles in a category (sorted by average rating)",
