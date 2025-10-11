@@ -146,6 +146,7 @@ class NewsArticleViewSet(viewsets.ModelViewSet):
         if instance.editor != self.request.user and not self.request.user.is_superuser:
             raise ValidationError({"status": "You can only delete your own articles."})
         instance.delete()
+    
 
 class NewsArticleImageViewSet(viewsets.ModelViewSet):
     serializer_class = NewsArticleImagesSerializer

@@ -4,6 +4,7 @@ from django.conf import settings
 from .validators import validate_file_size
 from cloudinary.models import CloudinaryField
 
+
 class Category(models.Model):
     name=models.CharField(max_length=100)
     description=models.TextField(blank=True, null=True)

@@ -17,10 +17,14 @@ class NewsArticleImagesSerializer(serializers.ModelSerializer):
 class NewsArticleSerializer(serializers.ModelSerializer):
     average_ratings=serializers.SerializerMethodField(method_name='get_average_ratings')
     images=NewsArticleImagesSerializer(many=True,read_only=True)
+    category = serializers.SerializerMethodField(method_name='get_category')
     class Meta:
         model=NewsArticle
         fields = ['id', 'title', 'body', 'category', 'published_date','images', 'average_ratings']
         read_only_fields=['average_ratings']
+    
+    def get_category(self, obj):
+        return obj.category.name if obj.category else None
 
     def get_average_ratings(self, obj):
         avg = obj.ratings.aggregate(avg=Avg("ratings"))["avg"]
