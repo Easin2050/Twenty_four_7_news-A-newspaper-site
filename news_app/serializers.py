@@ -63,12 +63,13 @@ class ArticleViewSerializer(serializers.ModelSerializer):
 
 
 class RatingSerializer(serializers.ModelSerializer):
-    average_ratings=serializers.SerializerMethodField(method_name='get_average_rating')
-    
+    article = NewsArticleSerializer(read_only=True)
+    average_ratings = serializers.SerializerMethodField(method_name='get_average_rating')
+
     class Meta:
         model = Rating
         fields = ['id', 'article', 'user', 'average_ratings', 'ratings']
-        read_only_fields = ['user','article']
+        read_only_fields = ['user', 'article']
 
     def get_average_rating(self, obj):
         avg = obj.article.ratings.aggregate(avg=Avg("ratings"))["avg"]
