@@ -217,13 +217,13 @@ class RatingViewSet(viewsets.ModelViewSet):
         user = self.request.user
         rating_value = self.request.data.get('ratings')
 
-        existing_rating = Rating.objects.filter(article=article, user=user).first()
-        if existing_rating:
-            existing_rating.ratings = rating_value
-            existing_rating.save()
-            serializer.instance = existing_rating
-        else:
-            serializer.save(user=user, article=article)
+        rating, created = Rating.objects.update_or_create(
+            article=article,
+            user=user,
+            defaults={'ratings': rating_value}
+        )
+
+        serializer.instance = rating  
 
         if author and author.email:
             send_mail(
@@ -253,7 +253,6 @@ class RatingViewSet(viewsets.ModelViewSet):
                 recipient_list=[user.email],
                 fail_silently=True,
             )
-
     @action(detail=False, methods=['get'], url_path='me')
     def my_ratings(self, request):
         ratings = Rating.objects.filter(user=request.user)

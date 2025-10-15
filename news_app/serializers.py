@@ -48,7 +48,7 @@ class HomepageArticleSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'body']
 
     def short_body_method(self, obj):
-        return obj.body[:50]+'...' if obj.body else ''
+        return obj.body[:50] + '...' if obj.body else ''
 
 
 class ArticleViewSerializer(serializers.ModelSerializer):
@@ -63,14 +63,13 @@ class ArticleViewSerializer(serializers.ModelSerializer):
 
 
 class RatingSerializer(serializers.ModelSerializer):
-    article = NewsArticleSerializer(read_only=True)
-    average_ratings = serializers.SerializerMethodField(method_name='get_average_rating')
-
+    # average_ratings = serializers.SerializerMethodField(method_name='get_average_rating')
+    
     class Meta:
         model = Rating
-        fields = ['id', 'article', 'user', 'average_ratings', 'ratings']
+        fields = ['id', 'article', 'user', 'ratings']
         read_only_fields = ['user', 'article']
 
-    def get_average_rating(self, obj):
+    '''def get_average_rating(self, obj):
         avg = obj.article.ratings.aggregate(avg=Avg("ratings"))["avg"]
-        return round(avg, 2) if avg is not None else None
+        return round(avg, 2) if avg is not None else None'''
