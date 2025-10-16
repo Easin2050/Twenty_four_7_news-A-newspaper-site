@@ -200,15 +200,16 @@ class EditorsViewSet(viewsets.ModelViewSet):
         serializer.save(editor=self.request.user)
 
 
-class RatingViewSet(viewsets.ModelViewSet):
+'''class RatingViewSet(viewsets.ModelViewSet):
     serializer_class = RatingSerializer
     permission_classes = [IsAuthenticated, IsReviewOwnerOrReadOnly]
 
     def get_queryset(self):
         article_id = self.kwargs.get('article_pk')
         if article_id:
-            return Rating.objects.filter(article_id=article_id)
-        return Rating.objects.filter(user=self.request.user)
+            return Rating.objects.select_related('user', 'article').filter(article_id=article_id)
+        return Rating.objects.select_related('user', 'article').filter(user=self.request.user)
+
 
     def perform_create(self, serializer):
         article_id = self.kwargs.get('article_pk')
@@ -256,6 +257,40 @@ class RatingViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['get'], url_path='me')
     def my_ratings(self, request):
         ratings = Rating.objects.filter(user=request.user)
+        serializer = self.get_serializer(ratings, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)'''
+
+class RatingViewSet(viewsets.ModelViewSet):
+    serializer_class = RatingSerializer
+    permission_classes = [IsReviewOwnerOrReadOnly]
+
+    def get_queryset(self):
+        # Handle article-based or user-based filtering
+        article_id = self.kwargs.get('article_pk')
+        user_id = self.kwargs.get('user_pk')
+
+        if article_id:
+            return Rating.objects.filter(article_id=article_id)
+        elif user_id:
+            return Rating.objects.filter(user_id=user_id)
+        else:
+            return Rating.objects.filter(user=self.request.user)
+
+    def get_serializer_context(self):
+        return {
+            'request': self.request,
+            'article_id': self.kwargs.get('article_pk')
+        }
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+    def perform_update(self, serializer):
+        serializer.save(user=self.request.user)
+
+    @action(detail=False, methods=['get'], url_path='me')
+    def my_ratings(self, request):
+        ratings = Rating.objects.select_related('article').filter(user=request.user)
         serializer = self.get_serializer(ratings, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
