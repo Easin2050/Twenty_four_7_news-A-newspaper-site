@@ -39,7 +39,7 @@ class NewsArticleSerializer2(serializers.ModelSerializer):
     short_body = serializers.SerializerMethodField(method_name='short_body_method')
     class Meta:
         model = NewsArticle
-        fields = ['id', 'title', 'short_body',]
+        fields = ['id', 'title', 'short_body']
 
     def short_body_method(self, obj):
         return obj.body[:150] + '...' if obj.body else ''
@@ -107,88 +107,14 @@ class RatingSerializer(serializers.ModelSerializer):
         return SimpleUserSerializer(obj.user).data
 
     def get_article(self, obj):
-        from news_app.serializers import NewsArticleSerializer2
         return NewsArticleSerializer2(obj.article).data
 
-    def create(self, validated_data):
+    def create(self,validated_data):
         article_id = self.context['article_id']
         user = self.context['request'].user
         rating_value = validated_data.get('ratings')
-
-        article = get_object_or_404(NewsArticle, id=article_id)
-        author = article.editor
-
-        rating, created = Rating.objects.update_or_create(
-            article=article,
+        Rating.objects.create(
+            article_id=article_id,
             user=user,
-            defaults={'ratings': rating_value}
+            ratings=rating_value
         )
-
-        if author and author.email:
-            send_mail(
-                subject=f"New rating on your article '{article.title}'",
-                message=(
-                    f"Hello {author.get_full_name()},\n\n"
-                    f"Your article '{article.title}' has received a new rating.\n"
-                    f"User: {user.get_full_name()}\n"
-                    f"Rating: {rating_value} stars\n\n"
-                    "Best regards,\nTwenty Four 7 News"
-                ),
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[author.email],
-                fail_silently=True,
-            )
-
-        if user and user.email:
-            send_mail(
-                subject=f"Thank you for rating '{article.title}'",
-                message=(
-                    f"Hello {user.get_full_name()},\n\n"
-                    f"Thank you for rating the article '{article.title}'.\n"
-                    f"Your rating: {rating_value} stars\n\n"
-                    "We appreciate your feedback!\nTwenty Four 7 News"
-                ),
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[user.email],
-                fail_silently=True,
-            )
-
-        return rating
-
-    def update(self, instance, validated_data):
-        instance.ratings = validated_data.get('ratings', instance.ratings)
-        instance.save()
-
-        user = instance.user
-        article = instance.article
-        author = article.editor
-
-        if author and author.email:
-            send_mail(
-                subject=f"Updated rating on your article '{article.title}'",
-                message=(
-                    f"Hello {author.get_full_name()},\n\n"
-                    f"User {user.get_full_name()} updated their rating.\n"
-                    f"New Rating: {instance.ratings} stars\n\n"
-                    "Best regards,\nTwenty Four 7 News"
-                ),
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[author.email],
-                fail_silently=True,
-            )
-
-        if user and user.email:
-            send_mail(
-                subject=f"Your rating updated for '{article.title}'",
-                message=(
-                    f"Hello {user.get_full_name()},\n\n"
-                    f"You updated your rating for article '{article.title}'.\n"
-                    f"New Rating: {instance.ratings} stars\n\n"
-                    "We appreciate your feedback!\nTwenty Four 7 News"
-                ),
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[user.email],
-                fail_silently=True,
-            )
-
-        return instance

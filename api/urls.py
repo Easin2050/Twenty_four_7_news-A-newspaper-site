@@ -38,6 +38,7 @@ urlpatterns = [
     path('', include(article_details_router.urls)),
     path('', include(articles_rating_router.urls)),  
     path('', include(editors_router.urls)),
+    path('', include(users_router.urls)),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
 ]

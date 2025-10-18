@@ -199,73 +199,25 @@ class EditorsViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(editor=self.request.user)
 
+class HomepageViewSet(viewsets.ModelViewSet):
+    serializer_class= HomepageArticleSerializer
+    search_fields=['title','body']
+    queryset=NewsArticle.objects.all().order_by('-published_date')[:1]
 
-'''class RatingViewSet(viewsets.ModelViewSet):
-    serializer_class = RatingSerializer
-    permission_classes = [IsAuthenticated, IsReviewOwnerOrReadOnly]
+    def get_permissions(self):
+        if self.request.method=='GET':
+            return [AllowAny()]
+        return [IsAdminOrReadOnly()]
 
-    def get_queryset(self):
-        article_id = self.kwargs.get('article_pk')
-        if article_id:
-            return Rating.objects.select_related('user', 'article').filter(article_id=article_id)
-        return Rating.objects.select_related('user', 'article').filter(user=self.request.user)
+    def update(self, request, *args, **kwargs):
+        return super().update(request, *args, **kwargs)
 
-
-    def perform_create(self, serializer):
-        article_id = self.kwargs.get('article_pk')
-        article = get_object_or_404(NewsArticle, pk=article_id)
-        author = article.editor
-        user = self.request.user
-        rating_value = self.request.data.get('ratings')
-
-        rating, created = Rating.objects.update_or_create(
-            article=article,
-            user=user,
-            defaults={'ratings': rating_value}
-        )
-
-        serializer.instance = rating  
-
-        if author and author.email:
-            send_mail(
-                subject=f"New rating on your article '{article.title}'",
-                message=(
-                    f"Hello {author.get_full_name()},\n\n"
-                    f"Your article '{article.title}' has received a new rating.\n"
-                    f"User: {user.get_full_name()}\n"
-                    f"Rating: {rating_value} stars\n\n"
-                    "Best regards,\nTwenty Four 7 News"
-                ),
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[author.email],
-                fail_silently=True,
-            )
-
-        if user and user.email:
-            send_mail(
-                subject=f"Thank you for rating '{article.title}'",
-                message=(
-                    f"Hello {user.get_full_name()},\n\n"
-                    f"Thank you for rating the article '{article.title}'.\n"
-                    f"Your rating: {rating_value} stars\n\n"
-                    "We appreciate your feedback!\nTwenty Four 7 News"
-                ),
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[user.email],
-                fail_silently=True,
-            )
-    @action(detail=False, methods=['get'], url_path='me')
-    def my_ratings(self, request):
-        ratings = Rating.objects.filter(user=request.user)
-        serializer = self.get_serializer(ratings, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)'''
 
 class RatingViewSet(viewsets.ModelViewSet):
     serializer_class = RatingSerializer
     permission_classes = [IsReviewOwnerOrReadOnly]
 
     def get_queryset(self):
-        # Handle article-based or user-based filtering
         article_id = self.kwargs.get('article_pk')
         user_id = self.kwargs.get('user_pk')
 
@@ -283,29 +235,55 @@ class RatingViewSet(viewsets.ModelViewSet):
         }
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        article_id = self.kwargs.get('article_pk')
+        article = get_object_or_404(NewsArticle, pk=article_id)
+        user = self.request.user
+        rating_value = serializer.validated_data.get('ratings')
+
+        rating, created = Rating.objects.update_or_create(
+            article=article,
+            user=user,
+            defaults={'ratings': rating_value}
+        )
+
+        serializer.instance = rating
+
+        try:
+            if article.editor and article.editor.email:
+                send_mail(
+                    subject=f"New rating on your article '{article.title}'" if created else f"Rating updated for your article '{article.title}'",
+                    message=(
+                        f"Hello {article.editor.get_full_name()},\n\n"
+                        f"Your article '{article.title}' has {'received a new' if created else 'been updated with a new'} rating.\n"
+                        f"User: {user.get_full_name()}\n"
+                        f"Rating: {rating_value} stars\n\n"
+                        "Best regards,\nTwenty Four 7 News"
+                    ),
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[article.editor.email],
+                    fail_silently=True,  
+                )
+
+            if user.email:
+                send_mail(
+                    subject=f"Thank you for rating '{article.title}'" if created else f"Your rating for '{article.title}' has been updated",
+                    message=(
+                        f"Hello {user.get_full_name()},\n\n"
+                        f"Thank you for {'rating' if created else 'updating your rating for'} the article '{article.title}'.\n"
+                        f"Your rating: {rating_value} stars\n\n"
+                        "We appreciate your feedback!\nTwenty Four 7 News"
+                    ),
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[user.email],
+                    fail_silently=True,
+                )
+        except Exception as e:
+            print("Email sending failed:", e)
 
     def perform_update(self, serializer):
         serializer.save(user=self.request.user)
 
-    @action(detail=False, methods=['get'], url_path='me')
-    def my_ratings(self, request):
-        ratings = Rating.objects.select_related('article').filter(user=request.user)
-        serializer = self.get_serializer(ratings, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
 
-class HomepageViewSet(viewsets.ModelViewSet):
-    serializer_class= HomepageArticleSerializer
-    search_fields=['title','body']
-    queryset=NewsArticle.objects.all().order_by('-published_date')[:1]
-
-    def get_permissions(self):
-        if self.request.method=='GET':
-            return [AllowAny()]
-        return [IsAdminOrReadOnly()]
-
-    def update(self, request, *args, **kwargs):
-        return super().update(request, *args, **kwargs)
 
 
 
