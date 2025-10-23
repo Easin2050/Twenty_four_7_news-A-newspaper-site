@@ -6,6 +6,7 @@ cloudinary==1.44.1
 cryptography==45.0.6
 defusedxml==0.7.1
 Django==5.2.5
+django-anymail==13.1
 django-cloudinary-storage==0.3.0
 django-debug-toolbar==6.0.0
 django-decouple==2.1

@@ -109,12 +109,13 @@ class RatingSerializer(serializers.ModelSerializer):
     def get_article(self, obj):
         return NewsArticleSerializer2(obj.article).data
 
-    def create(self,validated_data):
+    def create(self, validated_data):
         article_id = self.context['article_id']
         user = self.context['request'].user
         rating_value = validated_data.get('ratings')
-        Rating.objects.create(
+        rating = Rating.objects.create(
             article_id=article_id,
             user=user,
             ratings=rating_value
         )
+        return rating
