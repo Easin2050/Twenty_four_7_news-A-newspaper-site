@@ -234,11 +234,7 @@ class RatingViewSet(viewsets.ModelViewSet):
         }
 
     def perform_create(self, serializer):
-        from django.core.mail import send_mail
-        from django.conf import settings
-        from django.shortcuts import get_object_or_404
-
-        print("🚀 perform_create() called")
+        print("perform_create() called")
 
         article_id = self.kwargs.get('article_pk')
         article = get_object_or_404(NewsArticle, pk=article_id)
@@ -246,9 +242,8 @@ class RatingViewSet(viewsets.ModelViewSet):
         user = self.request.user
         rating_value = self.request.data.get('ratings')
 
-        print(f"📄 Article ID: {article_id}, User: {user.username}, Rating: {rating_value}")
+        print(f"Article ID: {article_id}, User: {user.username}, Rating: {rating_value}")
 
-        # Create or update the rating
         rating, created = Rating.objects.update_or_create(
             article=article,
             user=user,
@@ -256,9 +251,8 @@ class RatingViewSet(viewsets.ModelViewSet):
         )
         serializer.instance = rating
 
-        print("✅ Rating object created or updated:", "Created" if created else "Updated")
+        print("Rating object created or updated:", "Created" if created else "Updated")
 
-        # Prepare email details
         subject_author = (
             f"New rating on your article '{article.title}'"
             if created else
@@ -286,9 +280,8 @@ class RatingViewSet(viewsets.ModelViewSet):
             "We appreciate your feedback!\nTwenty Four 7 News"
         )
 
-        # Try to send both emails
         try:
-            print("📨 Attempting to send email to author...")
+            print("Attempting to send email to author...")
             if author and author.email:
                 send_mail(
                     subject_author,
@@ -297,14 +290,14 @@ class RatingViewSet(viewsets.ModelViewSet):
                     [author.email],
                     fail_silently=False
                 )
-                print("✅ Email sent to author:", author.email)
+                print("Email sent to author:", author.email)
             else:
-                print("⚠️ No author email found.")
+                print("No author email found.")
         except Exception as e:
-            print("❌ Failed to send email to author:", e)
+            print("Failed to send email to author:", e)
 
         try:
-            print("📨 Attempting to send email to user...")
+            print("Attempting to send email to user...")
             if user.email:
                 send_mail(
                     subject_user,
@@ -313,16 +306,71 @@ class RatingViewSet(viewsets.ModelViewSet):
                     [user.email],
                     fail_silently=False
                 )
-                print("✅ Email sent to user:", user.email)
+                print("Email sent to user:", user.email)
             else:
-                print("⚠️ No user email found.")
+                print("No user email found.")
         except Exception as e:
-            print("❌ Failed to send email to user:", e)
+            print("Failed to send email to user:", e)
 
-    # Handle updates too
     def perform_update(self, serializer):
-        print("🌀 perform_update() called")
-        self.perform_create(serializer)
+        print("perform_update() called")
+
+        rating = serializer.save()
+        user = self.request.user
+        article = rating.article
+        author = article.editor
+        rating_value = rating.ratings
+
+        print(f"Article ID: {article.id}, User: {user.username}, Updated Rating: {rating_value}")
+
+        subject_author = f"Rating updated for your article '{article.title}'"
+        message_author = (
+            f"Hello {author.get_full_name() or author.username},\n\n"
+            f"Your article '{article.title}' has been updated with a new rating.\n"
+            f"User: {user.get_full_name() or user.username}\n"
+            f"Rating: {rating_value} stars\n\n"
+            "Best regards,\nTwenty Four 7 News"
+        )
+
+        subject_user = f"Your rating for '{article.title}' has been updated"
+        message_user = (
+            f"Hello {user.get_full_name() or user.username},\n\n"
+            f"Thank you for updating your rating for the article '{article.title}'.\n"
+            f"Your new rating: {rating_value} stars\n\n"
+            "We appreciate your feedback!\nTwenty Four 7 News"
+        )
+
+        try:
+            print("Attempting to send email to author...")
+            if author and author.email:
+                send_mail(
+                    subject_author,
+                    message_author,
+                    settings.DEFAULT_FROM_EMAIL,
+                    [author.email],
+                    fail_silently=False
+                )
+                print("Email sent to author:", author.email)
+            else:
+                print("No author email found.")
+        except Exception as e:
+            print("Failed to send email to author:", e)
+
+        try:
+            print("Attempting to send email to user...")
+            if user.email:
+                send_mail(
+                    subject_user,
+                    message_user,
+                    settings.DEFAULT_FROM_EMAIL,
+                    [user.email],
+                    fail_silently=False
+                )
+                print("Email sent to user:", user.email)
+            else:
+                print("No user email found.")
+        except Exception as e:
+            print("Failed to send email to user:", e)
 
 
 
