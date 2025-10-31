@@ -33,7 +33,7 @@ class UserViewSet(ModelViewSet):
         if not request.user.is_superuser and user.id != request.user.id:
             raise ValidationError({"status": "You can only delete your own account."})
         user.delete()
-        return Response({"status": "User deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+        return Response({"status": "User deleted successfully"}, status=status.HTTP_200_OK)
 
 
 
