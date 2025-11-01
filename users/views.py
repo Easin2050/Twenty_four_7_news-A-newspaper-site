@@ -8,7 +8,7 @@ from django.contrib.auth import get_user_model
 from rest_framework.permissions import BasePermission, IsAuthenticated,IsAdminUser,AllowAny
 from users.pagination import CustomPagination
 from rest_framework.filters import SearchFilter,OrderingFilter
-from rest_framework.mixins import CreateModelMixin,RetrieveModelMixin,UpdateModelMixin,ListModelMixin
+from rest_framework.mixins import CreateModelMixin,RetrieveModelMixin,UpdateModelMixin,ListModelMixin,DestroyModelMixin
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import action
 from api.permissions import IsProfileOwnerOrAdmin
@@ -37,7 +37,7 @@ class UserViewSet(ModelViewSet):
 
 
 
-class UserProfileViewSet(GenericViewSet, RetrieveModelMixin, CreateModelMixin, UpdateModelMixin,ListModelMixin):
+class UserProfileViewSet(GenericViewSet, RetrieveModelMixin, CreateModelMixin, UpdateModelMixin,ListModelMixin,DestroyModelMixin):
     serializer_class = UserProfileSerializer
     permission_classes = [IsAuthenticated, IsProfileOwnerOrAdmin]
 
