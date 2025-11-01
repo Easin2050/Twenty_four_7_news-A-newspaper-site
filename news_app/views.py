@@ -105,10 +105,24 @@ class CategoryArticleViewSet(viewsets.ModelViewSet):
         return [IsEditorOrReadOnly()]
     
 class NewsArticleViewSet(viewsets.ModelViewSet):
-    serializer_class=NewsArticleSerializer
-    pagination_class=CustomPagination
-    search_fields=['title','body']
-    filter_backends=[SearchFilter,OrderingFilter]
+    serializer_class = NewsArticleSerializer
+    pagination_class = CustomPagination
+    search_fields = ['title', 'body']
+    filter_backends = [SearchFilter, OrderingFilter]
+
+    queryset = NewsArticle.objects.annotate(
+        average_rating=Avg('ratings__ratings')
+    ).order_by('-published_date')
+
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return ArticleViewSerializer
+        return NewsArticleSerializer
+
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            return [AllowAny()]
+        return [IsEditorOrReadOnly()]
 
     @swagger_auto_schema(
         operation_summary="List all news articles",
@@ -118,23 +132,8 @@ class NewsArticleViewSet(viewsets.ModelViewSet):
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
 
-    queryset = NewsArticle.objects.annotate(
-        average_rating=Avg('ratings__ratings'),
-    ).order_by('-published_date')
-
-    def get_serializer_class(self):
-        if self.action == 'retrieve':  
-            return ArticleViewSerializer  
-        return NewsArticleSerializer 
-
-    def get_permissions(self):
-        if self.request.method=='GET':
-            return [AllowAny()]
-        return [IsEditorOrReadOnly()]
-
-    def perform_create(self,serializer):
-        editor=self.request.user
-        serializer.save(editor=editor)
+    def perform_create(self, serializer):
+        serializer.save(editor=self.request.user)
 
     def perform_update(self, serializer):
         obj = self.get_object()

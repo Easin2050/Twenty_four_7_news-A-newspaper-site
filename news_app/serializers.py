@@ -18,7 +18,7 @@ class NewsArticleImagesSerializer(serializers.ModelSerializer):
         model=NewsArticleImage
         fields=['id','image']
 
-class NewsArticleSerializer(serializers.ModelSerializer):
+'''class NewsArticleSerializer(serializers.ModelSerializer):
     average_ratings=serializers.SerializerMethodField(method_name='get_average_ratings')
     images=NewsArticleImagesSerializer(many=True,read_only=True)
     category = serializers.SerializerMethodField(method_name='get_category')
@@ -32,8 +32,22 @@ class NewsArticleSerializer(serializers.ModelSerializer):
 
     def get_average_ratings(self, obj):
         avg = obj.ratings.aggregate(avg=Avg("ratings"))["avg"]
-        return round(avg, 2) if avg is not None else None
+        return round(avg, 2) if avg is not None else None'''
     
+class NewsArticleSerializer(serializers.ModelSerializer):
+    average_ratings = serializers.SerializerMethodField()
+    images = NewsArticleImagesSerializer(many=True, read_only=True)
+    category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
+    category_name = serializers.CharField(source='category.name', read_only=True)
+    
+    class Meta:
+        model = NewsArticle
+        fields = ['id', 'title', 'body', 'category', 'category_name', 'published_date', 'images', 'average_ratings']
+        read_only_fields = ['average_ratings']
+
+    def get_average_ratings(self, obj):
+        avg = obj.ratings.aggregate(avg=Avg("ratings"))["avg"]
+        return round(avg, 2) if avg is not None else 0
 
 class NewsArticleSerializer2(serializers.ModelSerializer):
     short_body = serializers.SerializerMethodField(method_name='short_body_method')
