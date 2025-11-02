@@ -172,7 +172,7 @@ class NewsArticleImageViewSet(viewsets.ModelViewSet):
             raise ValidationError({"status": "You do not have permission to edit images of this article."})
 
         if not self.request.data.get('image') and not self.request.FILES.get('image'):
-            serializer.save(image=image_instance.image)
+            serializer.save(image=image.image)
         else:
             serializer.save()
 
