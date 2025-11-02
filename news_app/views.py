@@ -171,7 +171,10 @@ class NewsArticleImageViewSet(viewsets.ModelViewSet):
         if self.request.user != article.editor and not self.request.user.is_superuser:
             raise ValidationError({"status": "You do not have permission to edit images of this article."})
 
-        serializer.save()
+        if not self.request.data.get('image') and not self.request.FILES.get('image'):
+            serializer.save(image=image_instance.image)
+        else:
+            serializer.save()
 
     def perform_destroy(self, instance):
         article = instance.news_article

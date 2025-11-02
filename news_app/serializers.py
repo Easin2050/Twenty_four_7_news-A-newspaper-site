@@ -25,8 +25,8 @@ class CategorySerializer(serializers.ModelSerializer):
             return str(obj.image) '''
 
 class NewsArticleImagesSerializer(serializers.ModelSerializer):
-    image = serializers.SerializerMethodField()
-
+    image = serializers.ImageField(required=False, allow_null=True)
+    http_method_names = ['get', 'patch']
     class Meta:
         model = NewsArticleImage
         fields = ['id', 'image']
@@ -36,7 +36,7 @@ class NewsArticleImagesSerializer(serializers.ModelSerializer):
             return obj.image.url
         except Exception:
             return str(obj.image) 
-    
+
     
 class NewsArticleSerializer(serializers.ModelSerializer):
     average_ratings = serializers.SerializerMethodField()
