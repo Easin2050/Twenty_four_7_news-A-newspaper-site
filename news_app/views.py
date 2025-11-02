@@ -202,18 +202,11 @@ class EditorsViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(editor=self.request.user)
 
-class HomepageViewSet(viewsets.ModelViewSet):
-    serializer_class= HomepageArticleSerializer
-    search_fields=['title','body']
-    queryset=NewsArticle.objects.all().order_by('-published_date')[:1]
-
-    def get_permissions(self):
-        if self.request.method=='GET':
-            return [AllowAny()]
-        return [IsAdminOrReadOnly()]
-
-    def update(self, request, *args, **kwargs):
-        return super().update(request, *args, **kwargs)
+class HomepageViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = HomepageArticleSerializer
+    search_fields = ['title', 'body']
+    queryset = NewsArticle.objects.all().order_by('-published_date')[:1]
+    permission_classes = [AllowAny]
 
 
 class RatingViewSet(viewsets.ModelViewSet):
