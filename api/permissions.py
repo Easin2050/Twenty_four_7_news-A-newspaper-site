@@ -47,3 +47,15 @@ class IsEditorOrReadOnly(permissions.BasePermission):
             return True
 
         return obj.editor == request.user or request.user.is_superuser
+
+
+class IsEditorOfArticleOrReadOnly(permissions.BasePermission):
+    def has_permission(self, request, view):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        return request.user.is_authenticated and (getattr(request.user, 'role', None) == 'editor' or request.user.is_superuser)
+
+    def has_object_permission(self, request, view, obj):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        return obj.news_article.editor == request.user or request.user.is_superuser

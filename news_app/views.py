@@ -6,7 +6,7 @@ from news_app.serializers import NewsArticleSerializer,CategorySerializer,Rating
 from users.pagination import CustomPagination
 from rest_framework.filters import SearchFilter,OrderingFilter
 from rest_framework.permissions import IsAdminUser,AllowAny,IsAuthenticated
-from api.permissions import IsAdminOrReadOnly,IsReviewOwnerOrReadOnly,IsEditorOrReadOnly
+from api.permissions import IsAdminOrReadOnly,IsReviewOwnerOrReadOnly,IsEditorOrReadOnly,IsEditorOfArticleOrReadOnly
 from django.core.mail import send_mail
 from django.conf import settings
 from rest_framework.exceptions import ValidationError
@@ -149,7 +149,8 @@ class NewsArticleViewSet(viewsets.ModelViewSet):
 
 class NewsArticleImageViewSet(viewsets.ModelViewSet):
     serializer_class = NewsArticleImagesSerializer
-    permission_classes = [IsEditorOrReadOnly]
+    permission_classes = [IsEditorOfArticleOrReadOnly]
+    lookup_field = 'pk'
 
     def get_queryset(self):
         return NewsArticleImage.objects.filter(news_article_id=self.kwargs.get('article_pk'))

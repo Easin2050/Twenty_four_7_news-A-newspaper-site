@@ -19,7 +19,7 @@ articles_router = routers.NestedDefaultRouter(router, 'categories', lookup='cate
 articles_router.register('articles', CategoryArticleViewSet, basename='category-articles')
 
 article_details_router = routers.NestedDefaultRouter(router, 'articles', lookup='article')
-article_details_router.register('details', NewsArticleViewSet, basename='article-details')
+# article_details_router.register('details', NewsArticleViewSet, basename='article-details')
 article_details_router.register('images', NewsArticleImageViewSet, basename='images')
 
 articles_rating_router = routers.NestedDefaultRouter(router, 'articles', lookup='article')

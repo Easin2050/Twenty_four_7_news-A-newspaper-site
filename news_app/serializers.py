@@ -12,27 +12,31 @@ class CategorySerializer(serializers.ModelSerializer):
         fields=['id','name','description']
 
 
-class NewsArticleImagesSerializer(serializers.ModelSerializer):
+'''class NewsArticleImagesSerializer(serializers.ModelSerializer):
     image=serializers.ImageField()
     class Meta:
         model=NewsArticleImage
         fields=['id','image']
+        
+    def get_image(self, obj):
+        try:
+            return obj.image.url  
+        except Exception:
+            return str(obj.image) '''
 
-'''class NewsArticleSerializer(serializers.ModelSerializer):
-    average_ratings=serializers.SerializerMethodField(method_name='get_average_ratings')
-    images=NewsArticleImagesSerializer(many=True,read_only=True)
-    category = serializers.SerializerMethodField(method_name='get_category')
+class NewsArticleImagesSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
     class Meta:
-        model=NewsArticle
-        fields = ['id', 'title', 'body', 'category', 'published_date','images', 'average_ratings']
-        read_only_fields=['average_ratings']
-    
-    def get_category(self, obj):
-        return obj.category.name if obj.category else None
+        model = NewsArticleImage
+        fields = ['id', 'image']
 
-    def get_average_ratings(self, obj):
-        avg = obj.ratings.aggregate(avg=Avg("ratings"))["avg"]
-        return round(avg, 2) if avg is not None else None'''
+    def get_image(self, obj):
+        try:
+            return obj.image.url
+        except Exception:
+            return str(obj.image) 
+    
     
 class NewsArticleSerializer(serializers.ModelSerializer):
     average_ratings = serializers.SerializerMethodField()
@@ -88,25 +92,6 @@ class SimpleUserSerializer(serializers.ModelSerializer):
 
     def get_full_name(self, obj):
         return obj.get_full_name() or obj.email  
-
-'''class RatingSerializer(serializers.ModelSerializer):
-    user= serializers.SerializerMethodField(method_name='get_user')
-    article = serializers.SerializerMethodField(method_name='get_article_details')
-
-    class Meta:
-        model = Rating
-        fields = ['id', 'article', 'user', 'ratings']
-        read_only_fields = ['user', 'article']
-
-    def get_user(self, obj):
-        return UserSerializer(obj.user).data
-
-    def get_article_details(self, obj):
-        return NewsArticleSerializer2(obj.article).data
-
-    def create(self, validated_data):
-        news_id = self.context['article_id']
-        return Rating.objects.create(article_id=news_id, **validated_data)'''
 
 class RatingSerializer(serializers.ModelSerializer):
     user = serializers.SerializerMethodField(method_name='get_user')
